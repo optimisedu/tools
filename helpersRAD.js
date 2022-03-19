@@ -1,12 +1,18 @@
 //manipulation;
+export const $ = document.getElementById;
+$();
 export const DASH = "-";
 export const USCORE = "_";
 export const SPACE = " ";
 export const EMPTY = "";
 export const isEven = (num) => num % 2 == 0;
+export const arr = [];
 export const isOdd = !isEven;
 export const isBinary = "/^0b[01]+$/i";
-
+export function truncateString(str, num) {
+  return str.length > num ? str.slice(0, num) + "..." : str;
+  //filter, typeof
+}
 //casing
 
 export const lowercase = (str) => str.toLowerCase();
@@ -42,3 +48,35 @@ export const camelCase = transformPipe(pascalCase, decapitalize);
 export const kebabCase = transformPipe(strip, addDashes, lowercase);
 export const snakeCase = transformPipe(strip, addUnderscores, lowercase);
 export const constantCase = transformPipe(strip, addUnderscores, uppercase);
+
+//USEFUL EVEVNTS
+export const hover = onmouseover();
+export const click = onclick();
+export const dclick = ondblclick();
+export let height = window.innerHeight(x)// optional z
+export let width = window.innerWidth(y)//
+for(let i = 0; i < arr.length; i++)
+
+
+//convolsuion - convulted methods and IMPURE functions
+
+let theNumber = Number(prompt("Pick a number"));
+if (!Number.isNaN(theNumber)) {
+  console.log("Your number is the square root of " + theNumber * theNumber);
+} else {
+  console.log("Hey. Why didn't you give me a number?");
+}
+
+
+//PURE FUNCTION RECURSION  -- The Y COMBINATOR
+
+export let = recusion function (n){
+    if (n < 2){
+      return 1;
+    }
+    else{
+      return n * recusion(n - 1);
+    }
+}
+
+
