@@ -1,76 +1,58 @@
 //manipulation;
-export const $ = document.getElementById;
-$();
-export const DASH = "-";
-export const USCORE = "_";
-export const SPACE = " ";
-export const EMPTY = "";
-export const isEven = (num) => num % 2 == 0;
-export const arr = [];
-export const isOdd = !isEven;
-export const isBinary = "/^0b[01]+$/i";
-export function truncateString(str, num) {
-  return str.length > num ? str.slice(0, num) + "..." : str;
-  //filter, typeof
-}
+
+const DASH = "-";
+const USCORE = "_";
+const SPACE = " ";
+const EMPTY = "";
+
 //casing
 
-export const lowercase = (str) => str.toLowerCase();
-export const uppercase = (str) => str.toUpperCase();
-export const capitalise = (str) => str.charAt(0).toUpperCase + s.slice(1);
-export const decapitalise = (str) => str.charAt(0).tolowerCase + s.slice(1);
-export const capitaliseWords = (str) =>
+ const lowercase = (str) => str.toLowerCase();
+ const uppercase = (str) => str.toUpperCase();
+ const capitalise = (str) => str.charAt(0).toUpperCase + s.slice(1);
+ const decapitalise = (str) => str.charAt(0).tolowerCase + s.slice(1);
+ const capitaliseWords = (str) =>
   str.split(space).map(capitalise).join(space);
 
 //replacing
 
-export const replace = (str, targ, subj) => str.split(targ).join(subj);
-export const removeDashes = (str) => replace(str, DASH, SPACE);
-export const removeUscores = (str) => replace(str, USCORE, SPACE);
-export const removeSpaces = (str) => replace(str, SPACE, EMPTY);
-export const addDashes = (str) => replace(str, SPACE, DASH);
-export const addUscores = (str) => replace(str, SPACE, USCORE);
+ const replace = (str, targ, subj) => str.split(targ).join(subj);
+ const removeDashes = (str) => replace(str, DASH, SPACE);
+ const removeUscores = (str) => replace(str, USCORE, SPACE);
+ const removeSpaces = (str) => replace(str, SPACE, EMPTY);
+ const addDashes = (str) => replace(str, SPACE, DASH);
+ const addUscores = (str) => replace(str, SPACE, USCORE);
 
 //functional
-export const _pipe = (a, b) => (arg) => b(a(arg));
-export const transformPipe = (...ops) => ops.reduce(_pipe);
-export const arrAdd = (arr, item) => [...arr, item];
-export function sumAll(arr) {
+ const _pipe = (a, b) => (arg) => b(a(arg));
+ const transformPipe = (...ops) => ops.reduce(_pipe);
+ const arrAdd = (arr, item) => [...arr, item];
+ function sumAll(arr) {
   const [first, last] = [...arr].sort((a, b) => a - b);
   return first !== last ? first + sumAll([first + 1, last]) : first;
 }
 
 //casing
-export const strip = transformPipe(stripDashes, stripUnderscores);
-export const startCase = transformPipe(strip, capitalizeWords);
-export const pascalCase = transformPipe(startCase, stripSpaces);
-export const camelCase = transformPipe(pascalCase, decapitalize);
-export const kebabCase = transformPipe(strip, addDashes, lowercase);
-export const snakeCase = transformPipe(strip, addUnderscores, lowercase);
-export const constantCase = transformPipe(strip, addUnderscores, uppercase);
+ const strip = transformPipe(stripDashes, stripUnderscores);
+ const startCase = transformPipe(strip, capitalizeWords);
+ const pascalCase = transformPipe(startCase, stripSpaces);
+ const camelCase = transformPipe(pascalCase, decapitalize);
+ const kebabCase = transformPipe(strip, addDashes, lowercase);
+ const snakeCase = transformPipe(strip, addUnderscores, lowercase);
+ const constantCase = transformPipe(strip, addUnderscores, uppercase);
 
 //USEFUL EVEVNTS
-export const hover = onmouseover();
-export const click = onclick();
-export const dclick = ondblclick();
-export let height = window.innerHeight(x)// optional z
-export let width = window.innerWidth(y)//
+ const hover = onmouseover();
+ const click = onclick();
+ const dclick = ondblclick();
+ let height = window.innerHeight(x)// optional z
+ let width = window.innerWidth(y)//
 for(let i = 0; i < arr.length; i++)
 
 
-//convolsuion - convulted methods and IMPURE functions
+//PURE FUNCTION RECURSION  -- LookUp The Y COMBINATOR
 
-let theNumber = Number(prompt("Pick a number"));
-if (!Number.isNaN(theNumber)) {
-  console.log("Your number is the square root of " + theNumber * theNumber);
-} else {
-  console.log("Hey. Why didn't you give me a number?");
-}
-
-
-//PURE FUNCTION RECURSION  -- The Y COMBINATOR
-
-export let = recusion function (n){
+ let = recusion function (n){
     if (n < 2){
       return 1;
     }
@@ -80,3 +62,43 @@ export let = recusion function (n){
 }
 
 
+//Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes 
+//as that is an unescissary application at this point but for more practical work with the shadodw dom and switching classes
+//these can be declared universally at the top of a stylesheet inorder to improve speed and readability.
+/* TODO:                                                                                                                      */
+/* benchmark time to create (x) elements and shadow elements using this method both as individual functors or as part of a file*/
+
+
+
+//building blocks D, S, C
+
+const D = doocument
+const S = shaddow
+const C = child
+
+
+
+//initialise shaddow DOM and muatable element creation and manipulation
+
+this.attachShadowRoot()
+const CSE = createShaddowElement //mode open and close <>
+const ASE = appendShadowRoot //not immutable but unlikely to cause unwarrented sideFX unless working with forms
+const CELE = customElement
+
+const CEL = createElement
+const GET = getElementById
+const QS = querySelector
+const APEL = appendElement//not immutable or functional
+const SETAT = setAttribute
+const SETATS = setAtrributes
+const SETSTR = setAtributesString
+const HASAT = hasAttribute //
+const SETVAL = setAtributeValue //not immutable or functional
+ const isEven = (num) => num % 2 == 0;
+ const arr = [];
+ const isOdd = !isEven;
+
+//events
+
+ const isBinary = "/^0b[01]+$/i";
+ const truncateString(str, num) =>  {str.length > num ? str.slice(0, num) + "..." : str;}
