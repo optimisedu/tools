@@ -1,29 +1,47 @@
-//manipulation;
+//manipulation  -  this is a functional buildup of lego
+// welcome to the mess that is my mind
 
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
 const EMPTY = "";
+const DOT = "."
 
 //casing
 
- const lowercase = (str) => str.toLowerCase();
+ const lowercase = (str) => str.toLowerCase();//curried functors
  const uppercase = (str) => str.toUpperCase();
  const capitalise = (str) => str.charAt(0).toUpperCase + s.slice(1);
  const decapitalise = (str) => str.charAt(0).tolowerCase + s.slice(1);
- const capitaliseWords = (str) =>
+ const capitaliseWords = (str) =>//array
   str.split(space).map(capitalise).join(space);
 
 //replacing
-
  const replace = (str, targ, subj) => str.split(targ).join(subj);
  const removeDashes = (str) => replace(str, DASH, SPACE);
  const removeUscores = (str) => replace(str, USCORE, SPACE);
  const removeSpaces = (str) => replace(str, SPACE, EMPTY);
  const addDashes = (str) => replace(str, SPACE, DASH);
  const addUscores = (str) => replace(str, SPACE, USCORE);
+ const removedot = (str) => replace (str, DOT, EMPTY)
+
+ //array primitives
+ const arr = ['a','b','c']
+ const arrrr = [1,2,3]
+ const arr2 = arr.map((item) => item + 1);
+const pop = arr.map((item) => (...arrrr.pop()))
+const unset = arr.map((item => (...arrrr.unset()))))) 
+const _filter = arr.map((arr) => (arr.filter(isEven))
+
+
+//string primative functional manipulation
+  const str = "hello world";
+  const strAdd = (str, item) => str + item;
+  const last = (str.length) => (str.length)-1
 
 //functional
+ const map = (fn, arr) => arr.map(fn);
+const filter = (fn, arr) => arr.filter(fn);
  const _pipe = (a, b) => (arg) => b(a(arg));
  const transformPipe = (...ops) => ops.reduce(_pipe);
  const arrAdd = (arr, item) => [...arr, item];
@@ -31,6 +49,13 @@ const EMPTY = "";
   const [first, last] = [...arr].sort((a, b) => a - b);
   return first !== last ? first + sumAll([first + 1, last]) : first;
 }
+
+
+
+
+//int
+const size = (int) => int.toString().length;
+const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
 
 //casing
  const strip = transformPipe(stripDashes, stripUnderscores);
@@ -47,9 +72,23 @@ const EMPTY = "";
  const dclick = ondblclick();
  let height = window.innerHeight(x)// optional z
  let width = window.innerWidth(y)//
-for(let i = 0; i < arr.length; i++)
+  for(let i = 0; i < arr.length; i++){
+    let loopy
+    console.log(loopy)
+  }
 
+//GENERRATOR
 
+const _yield = *function(){
+  yield 'hello';
+  yield 'world';
+
+  let str  = '';
+  for(const val of _yield()) {
+    str += val; 
+  }
+  return str;
+}
 //PURE FUNCTION RECURSION  -- LookUp The Y COMBINATOR
 
  let = recusion function (n){
@@ -61,10 +100,52 @@ for(let i = 0; i < arr.length; i++)
     }
 }
 
+//web
+const getJSON = (url) => fetch(url).then(res => res.json());
+const isValidUrl = function(url){
+  return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+}
+
+//image manipulation
+const loadImage = function(url){ 
+  return new Promise(function(resolve, reject){
+      const image = new Image();
+      image.onload = () => resolve(image);{
+          image.onerror = () => reject(new Error('Could not load image at ' + url));
+      };
+      image.src = url;
+  });
+};
+
+//getter/setter
+const get = (obj, key) => obj[key];
+const set = (obj, key, value) => {obj[key] = value; return obj;};
+const unset = (obj, key) => {delete obj[key]; return obj;};
+const has = (obj, key) => obj.hasOwnProperty(key);
+const hasnt = (obj, key) => !obj.hasOwnProperty(key);
+const hasValue = (obj, key, value) => obj[key] === value;
+const hasntValue = (obj, key, value) => obj[key] !== value;
+const hasKey = (obj, key) => obj.hasOwnProperty(key);
+
+
+
+//async 
+const fetch = async (url, res, rej) => { 
+  try{
+  Promise.reject(30);
+  const response = await fetch(url);
+  }catch(error){
+    console.log(error);
+  const json = await response.json();
+  return json;
+}
+
+
+_______________________________________________EASE OF USE ________________________________
 
 //Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes 
-//as that is an unescissary application at this point but for more practical work with the shadodw dom and switching classes
-//these can be declared universally at the top of a stylesheet inorder to improve speed and readability.
+//as that is an unescissary application at this point but for more practical work with the shadow dom and switching classes
+//these can be declared universally at the top of a stylesheet in order to improve speed and readability.
 /* TODO:                                                                                                                      */
 /* benchmark time to create (x) elements and shadow elements using this method both as individual functors or as part of a file*/
 
@@ -72,8 +153,8 @@ for(let i = 0; i < arr.length; i++)
 
 //building blocks D, S, C
 
-const D = doocument
-const S = shaddow
+const D = document
+const S = shadow
 const C = child
 
 
@@ -81,19 +162,18 @@ const C = child
 //initialise shaddow DOM and muatable element creation and manipulation
 
 this.attachShadowRoot()
-const CSE = createShaddowElement //mode open and close <>
-const ASE = appendShadowRoot //not immutable but unlikely to cause unwarrented sideFX unless working with forms
-const CELE = customElement
-
-const CEL = createElement
-const GET = getElementById
-const QS = querySelector
-const APEL = appendElement//not immutable or functional
-const SETAT = setAttribute
-const SETATS = setAtrributes
-const SETSTR = setAtributesString
-const HASAT = hasAttribute //
-const SETVAL = setAtributeValue //not immutable or functional
+createShadowElement //mode open and close <>
+appendShadowRoot //not immutable but unlikely to cause unwarrented sideFX unless working with forms
+customElement
+createElement
+getElementById
+querySelector
+appendElement
+setAttribute
+setAtrributes
+setAtributesString
+hasAttribute //
+setAtributeValue //not immutable or functional
  const isEven = (num) => num % 2 == 0;
  const arr = [];
  const isOdd = !isEven;
@@ -101,4 +181,10 @@ const SETVAL = setAtributeValue //not immutable or functional
 //events
 
  const isBinary = "/^0b[01]+$/i";
- const truncateString(str, num) =>  {str.length > num ? str.slice(0, num) + "..." : str;}
+
+ const truncateString(str, num) =>{
+  str.length > num ? str.slice(0, num) + "..." : str;
+  }
+
+ //for each
+ items.forEach((item)=>{console.log(item)})
