@@ -125,7 +125,6 @@ const has = (obj, key) => obj.hasOwnProperty(key);
 const hasnt = (obj, key) => !obj.hasOwnProperty(key);
 const hasValue = (obj, key, value) => obj[key] === value;
 const hasntValue = (obj, key, value) => obj[key] !== value;
-const hasKey = (obj, key) => obj.hasOwnProperty(key);
 
 
 
