@@ -1,4 +1,3 @@
-//manipulation  -  this is a functional buildup of lego
 // welcome to the mess that is my mind
 
 const DASH = "-";
@@ -30,8 +29,52 @@ const DOT = "."
  const arrrr = [1,2,3]
  const arr2 = arr.map((item) => item + 1);
 const pop = arr.map((item) => (...arrrr.pop()))
-const unset = arr.map((item => (...arrrr.unset()))))) 
+const unset = arr.map(item => (...arrrr.unset()))
 const _filter = arr.map((arr) => (arr.filter(isEven))
+const squared = (int)=> {int * int};
+const randomIdx = (arr, randomIdx) =>{
+    // from lowdash
+if (arr.length === 0) {
+    return arr;
+}
+return randomIdx = Math.floor(Math.random() * arr.length);
+}
+const baseSlice(array, start, end) => {
+    let index = -1,
+        length = array.length;
+
+    if (start < 0) {
+      start = -start > length ? 0 : (length + start);
+    }
+    end = end > length ? length : end;
+    if (end < 0) {
+      end += length;
+    }
+    length = start > end ? 0 : ((end - start) >>> 0);
+    start >>>= 0;
+
+    const result = Array(length);
+    while (++index < length) {
+      result[index] = array[index + start];
+    }
+    return result;
+  }
+
+
+  const reSize(obj, len, key) => {
+    let reSize = [];
+      if (!key){
+          len = 1;
+      }
+      else{
+          len = key.length
+      }
+    for(let i = 0, i <= len, i++){
+        reSize.push(obj[i])
+    }
+    return reSize
+  }
+
 
 
 //string primative functional manipulation
@@ -77,6 +120,11 @@ const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
     console.log(loopy)
   }
 
+const arrHead = (arr) => arr[0];
+
+
+
+
 //GENERRATOR
 
 const _yield = *function(){
@@ -85,7 +133,7 @@ const _yield = *function(){
 
   let str  = '';
   for(const val of _yield()) {
-    str += val; 
+    str += val;
   }
   return str;
 }
@@ -107,7 +155,7 @@ const isValidUrl = function(url){
 }
 
 //image manipulation
-const loadImage = function(url){ 
+const loadImage = function(url){
   return new Promise(function(resolve, reject){
       const image = new Image();
       image.onload = () => resolve(image);{
@@ -128,8 +176,8 @@ const hasntValue = (obj, key, value) => obj[key] !== value;
 
 
 
-//async 
-const fetch = async (url, res, rej) => { 
+//async
+const fetch = async (url, res, rej) => {
   try{
   Promise.reject(30);
   const response = await fetch(url);
@@ -142,7 +190,7 @@ const fetch = async (url, res, rej) => {
 
 _______________________________________________EASE OF USE ________________________________
 
-//Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes 
+//Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes
 //as that is an unescissary application at this point but for more practical work with the shadow dom and switching classes
 //these can be declared universally at the top of a stylesheet in order to improve speed and readability.
 /* TODO:                                                                                                                      */
