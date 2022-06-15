@@ -1,5 +1,5 @@
-// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
-
+// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change. 
+//This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
@@ -149,19 +149,31 @@ const arrTail = (arr) => arr[-1];
 
 //GENERRATOR
 
-const _yield = *function(){
-  yield 'hello';
-  yield 'world';
-
-  let str  = '';
-  for(const val of _yield()) {
-    str += val;
+const generator = function*(start = 0, end = 100, step = 1) {
+  let iterationCount = 0;
+  for (let i = start; i < end; i += step) {
+      iterationCount++;
+      yield i;
   }
-  return str;
+  return iterationCount;
 }
+
+const fibonacci = function* (n) {
+  let current = 0;
+
+  for (let i = 0; i < n; i++) {
+    let reset = yield current;
+    [current, next] = [next, next + current];
+    if (reset) {
+      current = 0;
+      next = 1;
+    }
+  }
+}
+
 //PURE FUNCTION RECURSION  -- LookUp The Y COMBINATOR
 
-let = recusion function (n){
+const recursion = function (n){
     if (n < 2){
       return 1;
     }
@@ -217,17 +229,17 @@ const imgToJpeg = function(img){
   return canvas.toDataURL('image/jpeg');
 }
 
-const getImageToBitmap(url) =>{
+const getImageToBitmap = (url) =>
 loadImage(url).then(imgToBitmap);
-}
 
-const getImageToJpeg(url){
-  loadImage(url).then(imgToJpeg);
-}
 
-const imgToPng(url) =>{
-  loadImage(url).then(imgToPng);
-}
+const getImageToJpeg = (url) =>
+loadImage(url).then(imgToJpeg);
+
+
+const imgToPng = (url) =>
+loadImage(url).then(imgToPng);
+
 
 //mutation obvserver
 const observer = new MutationObserver(function(mutations){
@@ -311,13 +323,13 @@ const fetch = async (url, res, rej) => {
   return json;
 }
 }
-_______________________________________________EASE OF USE ________________________________
+//_______________________________________________EASE OF USE ________________________________
 
 //Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes
 //as that is an unescissary application at this point but for more practical work with the shadow dom and switching classes
 //these can be declared universally at the top of a stylesheet in order to improve speed and readability.
 /* TODO:                                                                                                                      */
-/* benchmark time to create (x) elements and shadow elements using this method both as individual functors or as part of a file*/
+/* fix this random crap at the bottom*/
 
 
 
