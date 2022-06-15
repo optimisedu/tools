@@ -88,6 +88,45 @@ const truncatedString = (str, maxLength) => {
   }
 }
 
+//binery search
+
+  const binarySearch = (arr, item) => {
+    let low = 0;
+    let high = arr.length - 1;
+    let mid;
+    while (low <= high) {
+      mid = Math.floor((low + high) / 2);
+      if (arr[mid] === item) {
+        return mid;
+      }
+      else if (arr[mid] < item) {
+        low = mid + 1;
+      }
+      else {
+        high = mid - 1;
+      }
+    }
+    return -1;
+  }
+
+  const binarySearchRecursive = (arr, item, low, high) => {
+    if (low > high) {
+      return -1;
+    }
+    
+    let mid = Math.floor((low + high) / 2);
+    if (arr[mid] === item) {
+      return mid;
+    }
+    else if (arr[mid] < item) {
+      return binarySearchRecursive(arr, item, mid + 1, high);
+    }
+    else {
+      return binarySearchRecursive(arr, item, low, mid - 1);
+    }
+  }
+
+
 
 //decode URI
 const decode = (str) => decodeURIComponent(str);
