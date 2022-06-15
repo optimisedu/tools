@@ -157,7 +157,7 @@ const _yield = *function(){
 }
 //PURE FUNCTION RECURSION  -- LookUp The Y COMBINATOR
 
- let = recusion function (n){
+let = recusion function (n){
     if (n < 2){
       return 1;
     }
@@ -231,9 +231,34 @@ observer.observe(document.body, {
   characterData: true
 });
 
-//text decode
+//memoization
+const cache = {};
+  const saveCache = (key, value) => {
+    cache[key] = value;
+  }
+  const getCache = (key) => {
+    return cache[key];
+  }
+const memoize = function(fn){
+  return function(...args){
+    if(cache[args]){
+      return cache[args];
+    }
+    else{
+      const result = fn.apply(this, args);
+      cache[args] = result;
+      return result;
+    }
+  }
+}
 
-
+//Complete mess of a brute force search 
+const cacheSearch = (arr, cache) => {
+  while(let i = 0; i >= arr.length) 
+    if(arr[i] in cache)
+    {return arr2.map(arr[i])}
+    i++
+  }
 
 
 
@@ -258,8 +283,7 @@ const fetch = async (url, res, rej) => {
   const json = await response.json();
   return json;
 }
-
-
+}
 _______________________________________________EASE OF USE ________________________________
 
 //Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes
