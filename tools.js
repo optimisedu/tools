@@ -1,5 +1,6 @@
 // welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change. 
-//This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle
+//This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle --
+//warning -- I didn't take any advice on error handling
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
@@ -8,20 +9,23 @@ const DOT = "."
 const DOT_REGEX = /\./g;
 const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
+const ISBINARY = "/^0b[01]+$/i";
 
 //int primatives
 
-const add = (int, val) => int + val;
-const sub = (int, val) => int - val;
-const mul = (int, val) => int * val;
-const div = (int, val) => int / val;
-const mod = (int, val) => int % val;
-const pow = (int, val) => Math.pow(int, val);
-const sqrt = (int) => Math.sqrt(int);
-const random = (int) => (Math.floor(Math.random) * int) + 1; 
+let i
+const ADD = (int, val) => int + val;
+const SUB = (int, val) => int - val;
+const MUL = (int, val) => int * val;
+const DIV = (int, val) => int / val;
+const MOD = (int, val) => int % val;
+const POW = (int, val) => Math.pow(int, val);
+const SQRT = (int) => Math.sqrt(int);
+const randomInt = (val) => Math.floor(Math.random() * val) ; 
+const isEven = (num) => num % 2 == 0;
+const isOdd = !isEven;
 
 // int manipulation
-let i
 const toString = (int) => int.toString();
 const toInt = (str) => parseInt(str);
 const toFloat = (str) => parseFloat(str);
@@ -75,6 +79,16 @@ const concatWithUscore = (str) => concat(str, USCORE);
 const concatWithDot = (str) => concat(str, DOT);
 const concatWithLetter = (str) => concat(str, EMPTY);
 
+const truncatedString = (str, maxLength) => {
+  if (str.length > maxLength) {
+    return str.slice(0, maxLength);
+  }
+  else{
+  return str;
+  }
+}
+
+
 //decode URI
 const decode = (str) => decodeURIComponent(str);
 
@@ -96,6 +110,7 @@ const arr2 = arr.map((item) => item + 1);
 const pop = (arr) => (arr.pop())
 const unset = (arr) => (arr.unset())
 const _filterEven = (arr) => (arr.filter(isEven))
+const squared = (int)=> {int * int};
 
   const reSize = (obj, len, key) => {
     let reSize = [];
@@ -258,12 +273,12 @@ observer.observe(document.body, {
   characterData: true
 });
 
-//memoization
-const cache = {};
-  const saveCache = (key, value) => {
+//memoization -- keep the cache as a local scope
+const saveCache = (key, value) => {
+    const cache = {};
     cache[key] = value;
   }
-  const getCache = (key) => {
+  const getCache = (key) => { 
     return cache[key];
   }
 const memoize = function(fn){
@@ -328,7 +343,7 @@ const fetch = async (url, res, rej) => {
 //as that is an unescissary application at this point but for more practical work with the shadow dom and switching classes
 //these can be declared universally at the top of a stylesheet in order to improve speed and readability.
 /* TODO:                                                                                                                      */
-/* fix this random crap at the bottom*/
+/* benchmark time to create (x) elements and shadow elements using this method both as individual functors or as part of a file*/
 
 
 
@@ -355,17 +370,5 @@ setAtrributes
 setAtributesString
 hasAttribute //
 setAtributeValue //not immutable or functional
- const isEven = (num) => num % 2 == 0;
- const arr = [];
- const isOdd = !isEven;
 
-//events
 
- const isBinary = "/^0b[01]+$/i";
-
- const truncateString(str, num) =>{
-  str.length > num ? str.slice(0, num) + "..." : str;
-  }
-
- //for each
- items.forEach((item)=>{console.log(item)})
