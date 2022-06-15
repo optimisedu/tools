@@ -1,10 +1,19 @@
-// welcome to the mess that is my mind
-
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
 const EMPTY = "";
 const DOT = "."
+
+//int primatives
+
+const add = (int, val) => int + val;
+const sub = (int, val) => int - val;
+const mul = (int, val) => int * val;
+const div = (int, val) => int / val;
+const mod = (int, val) => int % val;
+const pow = (int, val) => Math.pow(int, val);
+const sqrt = (int) => Math.sqrt(int);
+const random = (int) => (Math.floor(Math.random) * int) + 1; 
 
 //casing
 
@@ -23,6 +32,38 @@ const DOT = "."
  const addDashes = (str) => replace(str, SPACE, DASH);
  const addUscores = (str) => replace(str, SPACE, USCORE);
  const removedot = (str) => replace (str, DOT, EMPTY)
+
+//splitting
+    const split = (str, sep) => str.split(sep);
+    const splitOnSpace = (str) => split(str, SPACE);
+    const splitOnDash = (str) => split(str, DASH);
+    const splitOnUscore = (str) => split(str, USCORE);  
+    const splitOnDot = (str) => split(str, DOT);
+    const splitOnLetter = (str) => split(str, EMPTY);
+
+    //joining
+    const join = (str, sep) => str.join(sep);
+    const joinWithSpace = (str) => join(str, SPACE);
+    const joinWithDash = (str) => join(str, DASH);
+    const joinWithUscore = (str) => join(str, USCORE);
+    const joinWithDot = (str) => join(str, DOT);
+    const joinWithLetter = (str) => join(str, EMPTY);
+
+    //concatenation
+    const concat = (str, sep) => str.concat(sep);
+    const concatWithSpace = (str) => concat(str, SPACE);
+    const concatWithDash = (str) => concat(str, DASH);
+    const concatWithUscore = (str) => concat(str, USCORE);
+    const concatWithDot = (str) => concat(str, DOT);
+    const concatWithLetter = (str) => concat(str, EMPTY);
+
+    //mapping#
+    const arrMap = (input, output)  => output.map(input);
+    const mapWithSpace = (input, output) => output.map(input.forEach(input.splittWithSpace));
+    const mapWithDash = (input, output) => output.map(input.forEach(input.splitWithDash));
+    const mapWithUscore = (input, output) => output.map(input.forEach(input.splitWithUscore));
+    const mapWithDot = (input, output) => output.map(input.forEach(input.splitWithDot));
+    const mapWithLetter = (input, output) => output.map(input.forEach(input.splitWithLetter)); 
 
  //array primitives
  const arr = ['a','b','c']
