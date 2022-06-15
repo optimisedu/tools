@@ -3,6 +3,9 @@ const USCORE = "_";
 const SPACE = " ";
 const EMPTY = "";
 const DOT = "."
+const DOT_REGEX = /\./g;
+const SPACE_REGEX = /\s/g;
+const USCORE_REGEX = /_/g;
 
 //int primatives
 
@@ -15,6 +18,18 @@ const pow = (int, val) => Math.pow(int, val);
 const sqrt = (int) => Math.sqrt(int);
 const random = (int) => (Math.floor(Math.random) * int) + 1; 
 
+// int manipulation
+const toString = (int) => int.toString();
+const toInt = (str) => parseInt(str);
+const toFloat = (str) => parseFloat(str);
+const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
+
+//string primative functional manipulation -- search "more later"
+const str = "hello world";
+const strAdd = (str, item) => str + item;
+const last = (str.length) => (str.length)-1
+const size = (int) => int.toString().length;
+
 //casing
 
  const lowercase = (str) => str.toLowerCase();//curried functors
@@ -25,6 +40,7 @@ const random = (int) => (Math.floor(Math.random) * int) + 1;
   str.split(space).map(capitalise).join(space);
 
 //replacing
+const split = (str, sep) => str.split(sep);
  const replace = (str, targ, subj) => str.split(targ).join(subj);
  const removeDashes = (str) => replace(str, DASH, SPACE);
  const removeUscores = (str) => replace(str, USCORE, SPACE);
@@ -34,73 +50,50 @@ const random = (int) => (Math.floor(Math.random) * int) + 1;
  const removedot = (str) => replace (str, DOT, EMPTY)
 
 //splitting
-    const split = (str, sep) => str.split(sep);
-    const splitOnSpace = (str) => split(str, SPACE);
-    const splitOnDash = (str) => split(str, DASH);
-    const splitOnUscore = (str) => split(str, USCORE);  
-    const splitOnDot = (str) => split(str, DOT);
-    const splitOnLetter = (str) => split(str, EMPTY);
+const splitOnSpace = (str) => split(str, SPACE);
+const splitOnDash = (str) => split(str, DASH);
+const splitOnUscore = (str) => split(str, USCORE);  
+const splitOnDot = (str) => split(str, DOT);
+const splitOnLetter = (str) => split(str, EMPTY);
 
-    //joining
-    const join = (str, sep) => str.join(sep);
-    const joinWithSpace = (str) => join(str, SPACE);
-    const joinWithDash = (str) => join(str, DASH);
-    const joinWithUscore = (str) => join(str, USCORE);
-    const joinWithDot = (str) => join(str, DOT);
-    const joinWithLetter = (str) => join(str, EMPTY);
+//joining
+const join = (str, sep) => str.join(sep);
+const joinWithSpace = (str) => join(str, SPACE);
+const joinWithDash = (str) => join(str, DASH);
+const joinWithUscore = (str) => join(str, USCORE);
+const joinWithDot = (str) => join(str, DOT);
+const joinWithLetter = (str) => join(str, EMPTY);
 
-    //concatenation
-    const concat = (str, sep) => str.concat(sep);
-    const concatWithSpace = (str) => concat(str, SPACE);
-    const concatWithDash = (str) => concat(str, DASH);
-    const concatWithUscore = (str) => concat(str, USCORE);
-    const concatWithDot = (str) => concat(str, DOT);
-    const concatWithLetter = (str) => concat(str, EMPTY);
+//concatenation
+const concat = (str, sep) => str.concat(sep);
+const concatWithSpace = (str) => concat(str, SPACE);
+const concatWithDash = (str) => concat(str, DASH);
+const concatWithUscore = (str) => concat(str, USCORE);
+const concatWithDot = (str) => concat(str, DOT);
+const concatWithLetter = (str) => concat(str, EMPTY);
 
-    //mapping#
-    const arrMap = (input, output)  => output.map(input);
-    const mapWithSpace = (input, output) => output.map(input.forEach(input.splittWithSpace));
-    const mapWithDash = (input, output) => output.map(input.forEach(input.splitWithDash));
-    const mapWithUscore = (input, output) => output.map(input.forEach(input.splitWithUscore));
-    const mapWithDot = (input, output) => output.map(input.forEach(input.splitWithDot));
-    const mapWithLetter = (input, output) => output.map(input.forEach(input.splitWithLetter)); 
+//decode URI
+const decode = (str) => decodeURIComponent(str);
 
- //array primitives
- const arr = ['a','b','c']
- const arrrr = [1,2,3]
- const arr2 = arr.map((item) => item + 1);
-const pop = arr.map((item) => (...arrrr.pop()))
-const unset = arr.map(item => (...arrrr.unset()))
-const _filter = arr.map((arr) => (arr.filter(isEven))
+//encode string
+const encode = (str) => encodeURIComponent(str);
+
+//mapping
+const arrMap = (input, output)  => output.map(input);
+const mapWithSpace = (input, output) => output.map(input.forEach(input.splittWithSpace));
+const mapWithDash = (input, output) => output.map(input.forEach(input.splitWithDash));
+const mapWithUscore = (input, output) => output.map(input.forEach(input.splitWithUscore));
+const mapWithDot = (input, output) => output.map(input.forEach(input.splitWithDot));
+const mapWithLetter = (input, output) => output.map(input.forEach(input.splitWithLetter)); 
+
+//array primitives
+const arr = ['a','b','c']
+const arrr = [1,2,3]
+const arr2 = arr.map((item) => item + 1);
+const pop = (item, position) => (...arr.pop[position]())
+const unset = (item, position) => (...arr.pop[position]())
+const _filter = arr.map(arr) => (arrN.filter(isEven))
 const squared = (int)=> {int * int};
-const randomIdx = (arr, randomIdx) =>{
-    // from lowdash
-if (arr.length === 0) {
-    return arr;
-}
-return randomIdx = Math.floor(Math.random() * arr.length);
-}
-const baseSlice(array, start, end) => {
-    let index = -1,
-        length = array.length;
-
-    if (start < 0) {
-      start = -start > length ? 0 : (length + start);
-    }
-    end = end > length ? length : end;
-    if (end < 0) {
-      end += length;
-    }
-    length = start > end ? 0 : ((end - start) >>> 0);
-    start >>>= 0;
-
-    const result = Array(length);
-    while (++index < length) {
-      result[index] = array[index + start];
-    }
-    return result;
-  }
-
 
   const reSize(obj, len, key) => {
     let reSize = [];
@@ -116,13 +109,6 @@ const baseSlice(array, start, end) => {
     return reSize
   }
 
-
-
-//string primative functional manipulation
-  const str = "hello world";
-  const strAdd = (str, item) => str + item;
-  const last = (str.length) => (str.length)-1
-
 //functional
  const map = (fn, arr) => arr.map(fn);
 const filter = (fn, arr) => arr.filter(fn);
@@ -133,13 +119,6 @@ const filter = (fn, arr) => arr.filter(fn);
   const [first, last] = [...arr].sort((a, b) => a - b);
   return first !== last ? first + sumAll([first + 1, last]) : first;
 }
-
-
-
-
-//int
-const size = (int) => int.toString().length;
-const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
 
 //casing
  const strip = transformPipe(stripDashes, stripUnderscores);
@@ -162,9 +141,7 @@ const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
   }
 
 const arrHead = (arr) => arr[0];
-
-
-
+const arrTail = (arr) => arr[-1];
 
 //GENERRATOR
 
@@ -205,6 +182,60 @@ const loadImage = function(url){
       image.src = url;
   });
 };
+
+//img to bitmap -- use the sharp library for image manipulation instead to avoid prohibitively long wait times
+const imgToBitmap = function(img){
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  return ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+//img to jpg file
+const imgToJpg = function(img){
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  return canvas.toDataURL('image/jpeg');
+}
+
+//img to png 
+const imgToJpg = function(img){
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  return canvas.toDataURL('image/jpeg');
+}
+
+//mutation obvserver
+const observer = new MutationObserver(function(mutations){
+  mutations.forEach(function(mutation){
+    if(mutation.type === 'childList'){
+      console.log('A child node has been added or removed.');
+    }
+    else if(mutation.type === 'attributes'){
+      console.log('An attribute of an element has changed.');
+    }
+  });
+}
+);
+observer.observe(document.body, {
+  attributes: true,
+  childList: true,
+  characterData: true
+});
+
+//text decode
+
+
+
+
 
 //getter/setter
 const get = (obj, key) => obj[key];
