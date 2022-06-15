@@ -253,12 +253,26 @@ const memoize = function(fn){
 }
 
 //Complete mess of a brute force search 
-const cacheSearch = (arr, cache) => {
-  while(let i = 0; i >= arr.length) 
-    if(arr[i] in cache)
-    {return arr2.map(arr[i])}
-    i++
+// const cacheSearch = (arr, cache) => {
+//   while(let i = 0; i >= arr.length) 
+//     if(arr[i] in cache)
+//     {return arr2.map(arr[i])}
+//     i++
+//   }
+
+  const cacheSearch = (arr, target) => {
+    let cache = {};
+    for(let i = 0; i < arr.length; i++){
+      if(arr[i] === target){
+        return i;
+      }
+      else{
+        cache[arr[i]] = i;
+      }
+    }
+    return -1;
   }
+
 
 
 
