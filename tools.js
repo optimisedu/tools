@@ -96,7 +96,6 @@ const arr2 = arr.map((item) => item + 1);
 const pop = (arr) => (arr.pop())
 const unset = (arr) => (arr.unset())
 const _filterEven = (arr) => (arr.filter(isEven))
-const squared = (int)=> {int * int};
 
   const reSize = (obj, len, key) => {
     let reSize = [];
