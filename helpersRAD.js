@@ -1,3 +1,5 @@
+// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
+
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
@@ -19,6 +21,7 @@ const sqrt = (int) => Math.sqrt(int);
 const random = (int) => (Math.floor(Math.random) * int) + 1; 
 
 // int manipulation
+let i
 const toString = (int) => int.toString();
 const toInt = (str) => parseInt(str);
 const toFloat = (str) => parseFloat(str);
@@ -27,7 +30,7 @@ const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
 //string primative functional manipulation -- search "more later"
 const str = "hello world";
 const strAdd = (str, item) => str + item;
-const last = (str.length) => (str.length)-1
+const last = (str) => (str.length[-1])
 const size = (int) => int.toString().length;
 
 //casing
@@ -90,12 +93,12 @@ const mapWithLetter = (input, output) => output.map(input.forEach(input.splitWit
 const arr = ['a','b','c']
 const arrr = [1,2,3]
 const arr2 = arr.map((item) => item + 1);
-const pop = (item, position) => (...arr.pop[position]())
-const unset = (item, position) => (...arr.pop[position]())
-const _filter = arr.map(arr) => (arrN.filter(isEven))
+const pop = (arr) => (arr.pop())
+const unset = (arr) => (arr.unset())
+const _filterEven = (arr) => (arr.filter(isEven))
 const squared = (int)=> {int * int};
 
-  const reSize(obj, len, key) => {
+  const reSize = (obj, len, key) => {
     let reSize = [];
       if (!key){
           len = 1;
@@ -103,7 +106,8 @@ const squared = (int)=> {int * int};
       else{
           len = key.length
       }
-    for(let i = 0, i <= len, i++){
+    for(i = 0; i <= len; i++)
+    {
         reSize.push(obj[i])
     }
     return reSize
@@ -135,7 +139,7 @@ const filter = (fn, arr) => arr.filter(fn);
  const dclick = ondblclick();
  let height = window.innerHeight(x)// optional z
  let width = window.innerWidth(y)//
-  for(let i = 0; i < arr.length; i++){
+  for(i = 0; i < arr.length; i++){
     let loopy
     console.log(loopy)
   }
@@ -172,7 +176,7 @@ const isValidUrl = function(url){
   return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 }
 
-//image manipulation
+//image manipulation -- 
 const loadImage = function(url){
   return new Promise(function(resolve, reject){
       const image = new Image();
@@ -194,7 +198,17 @@ const imgToBitmap = function(img){
 }
 
 //img to jpg file
-const imgToJpg = function(img){
+const imgTopng = function(img){
+  const canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  return canvas.toDataURL('image/png');
+}
+
+//img to png 
+const imgToJpeg = function(img){
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
   canvas.height = img.height;
@@ -203,14 +217,16 @@ const imgToJpg = function(img){
   return canvas.toDataURL('image/jpeg');
 }
 
-//img to png 
-const imgToJpg = function(img){
-  const canvas = document.createElement('canvas');
-  canvas.width = img.width;
-  canvas.height = img.height;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-  return canvas.toDataURL('image/jpeg');
+const getImageToBitmap(url) =>{
+loadImage(url).then(imgToBitmap);
+}
+
+const getImageToJpeg(url){
+  loadImage(url).then(imgToJpeg);
+}
+
+const imgToPng(url) =>{
+  loadImage(url).then(imgToPng);
 }
 
 //mutation obvserver
@@ -254,7 +270,7 @@ const memoize = function(fn){
 
 //Complete mess of a brute force search 
 // const cacheSearch = (arr, cache) => {
-//   while(let i = 0; i >= arr.length) 
+//   while(i = 0; i >= arr.length) 
 //     if(arr[i] in cache)
 //     {return arr2.map(arr[i])}
 //     i++
@@ -262,7 +278,7 @@ const memoize = function(fn){
 
   const cacheSearch = (arr, target) => {
     let cache = {};
-    for(let i = 0; i < arr.length; i++){
+    for(i = 0; i < arr.length; i++){
       if(arr[i] === target){
         return i;
       }
@@ -271,9 +287,6 @@ const memoize = function(fn){
       }
     }
     return -1;
-  }
-
-
 
 
 //getter/setter
