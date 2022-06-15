@@ -1,6 +1,8 @@
 // welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change. 
 //This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle --
 //warning -- I didn't take any advice on error handling
+
+//____________________________________________________________________BLOCKS______________________________________________________________________________
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
@@ -11,7 +13,7 @@ const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
 const ISBINARY = "/^0b[01]+$/i";
 
-//int primatives
+//__________________________________________________________________INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
 
 let i
 const ADD = (int, val) => int + val;
@@ -31,7 +33,7 @@ const toInt = (str) => parseInt(str);
 const toFloat = (str) => parseFloat(str);
 const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
 
-//string primative functional manipulation -- search "more later"
+//________________________________________________________________STRING MANIPULATION________________________________________________________________________________
 const str = "hello world";
 const strAdd = (str, item) => str + item;
 const last = (str) => (str.length[-1])
@@ -88,7 +90,27 @@ const truncatedString = (str, maxLength) => {
   }
 }
 
+//casing
+ const strip = transformPipe(stripDashes, stripUnderscores);
+ const startCase = transformPipe(strip, capitalizeWords);
+ const pascalCase = transformPipe(startCase, stripSpaces);
+ const camelCase = transformPipe(pascalCase, decapitalize);
+ const kebabCase = transformPipe(strip, addDashes, lowercase);
+ const snakeCase = transformPipe(strip, addUnderscores, lowercase);
+ const constantCase = transformPipe(strip, addUnderscores, uppercase);
 
+//USEFUL EVEVNTS
+ const hover = onmouseover();
+ const click = onclick();
+ const dclick = ondblclick();
+ let height = window.innerHeight(x)// optional z
+ let width = window.innerWidth(y)//
+  for(i = 0; i < arr.length; i++){
+    let loopy
+    console.log(loopy)
+  }
+
+//_______________________________________________________________SEARCH_____________________________________________________________________________________________
 
 //binery search
 
@@ -128,6 +150,8 @@ const truncatedString = (str, maxLength) => {
     }
   }
 
+  
+ // __________________________________________________________________ARRAYS________________________________________________________________________
   
   // 2d array
   const twoDArray = (rows, cols, val) => {
@@ -251,26 +275,6 @@ const filter = (fn, arr) => arr.filter(fn);
   return first !== last ? first + sumAll([first + 1, last]) : first;
 }
 
-//casing
- const strip = transformPipe(stripDashes, stripUnderscores);
- const startCase = transformPipe(strip, capitalizeWords);
- const pascalCase = transformPipe(startCase, stripSpaces);
- const camelCase = transformPipe(pascalCase, decapitalize);
- const kebabCase = transformPipe(strip, addDashes, lowercase);
- const snakeCase = transformPipe(strip, addUnderscores, lowercase);
- const constantCase = transformPipe(strip, addUnderscores, uppercase);
-
-//USEFUL EVEVNTS
- const hover = onmouseover();
- const click = onclick();
- const dclick = ondblclick();
- let height = window.innerHeight(x)// optional z
- let width = window.innerWidth(y)//
-  for(i = 0; i < arr.length; i++){
-    let loopy
-    console.log(loopy)
-  }
-
 const arrHead = (arr) => arr[0];
 const arrTail = (arr) => arr[-1];
 
@@ -326,7 +330,7 @@ const loadImage = function(url){
   });
 };
 
-//img to bitmap -- use the sharp library for image manipulation instead to avoid prohibitively long wait times
+//_____________________________________________________________________IMAGE MANIPULATION________________________________________________________
 const imgToBitmap = function(img){
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
@@ -336,7 +340,7 @@ const imgToBitmap = function(img){
   return ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-//img to jpg file
+
 const imgTopng = function(img){
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
@@ -346,7 +350,6 @@ const imgTopng = function(img){
   return canvas.toDataURL('image/png');
 }
 
-//img to png 
 const imgToJpeg = function(img){
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
