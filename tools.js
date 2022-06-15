@@ -88,6 +88,8 @@ const truncatedString = (str, maxLength) => {
   }
 }
 
+
+
 //binery search
 
   const binarySearch = (arr, item) => {
@@ -113,7 +115,7 @@ const truncatedString = (str, maxLength) => {
     if (low > high) {
       return -1;
     }
-    
+
     let mid = Math.floor((low + high) / 2);
     if (arr[mid] === item) {
       return mid;
@@ -126,9 +128,81 @@ const truncatedString = (str, maxLength) => {
     }
   }
 
+  
+  // 2d array
+  const twoDArray = (rows, cols, val) => {
+    let arr = [];
+    for ( = 0; i < rows; i++) {
+      arr[i] = [];
+      for (let j = 0; j < cols; j++) {
+        arr[i][j] = val;
+      }
+    }
+  // return arr;
+  // functional
+  return arr.map(row => row.map(col => col = val));  
+  }
+  // 3d array
+  const threeDArray = (rows, cols, depths, val) => {
+    let arr = [];
+    for ( = 0; i < rows; i++) {
+      arr[i] = [];
+      for (let j = 0; j < cols; j++) {
+        arr[i][j] = [];
+        for (let k = 0; k < depths; k++) {
+          arr[i][j][k] = val;
+        }
+      }
+    }
+  // return arr;
+  // functional 
+  return arr.map(row => row.map(col => col.map(depth => depth = val)));
+  }
+  // 4d array
+  const fourDArray = (rows, cols, depths, heights, val) => {      
+    let arr = [];
+    for ( = 0; i < rows; i++) {
+      arr[i] = [];
+      for (let j = 0; j < cols; j++) {
+        arr[i][j] = [];
+        for (let k = 0; k < depths; k++) {
+          arr[i][j][k] = [];
+          for (let l = 0; l < heights; l++) {
+            arr[i][j][k][l] = val;
+          }
+        }
+      }
+    }
+  // return arr;
+  // functional
+  return arr.map(row => row.map(col => col.map(depth => depth.map(height => height = val))));
+  }
 
-
-//decode URI
+  //matrix
+  const matrix = (rows, cols, val) => {
+    let matrix = [];
+    for ( = 0; i < rows; i++) {  
+      matrix[i] = [];
+      for (let j = 0; j < cols; j++) {
+        matrix[i][j] = val;
+      }
+    }
+    return matrix.map(row => row.map(col => col = val));
+  }
+  
+  const matrixSearch = (matrix, item) => {
+    for ( = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        if (matrix[i][j] === item) {
+          return true;
+        }
+      }
+    }
+    return false; 
+  }
+  
+  
+  //decode URI
 const decode = (str) => decodeURIComponent(str);
 
 //encode string
@@ -204,7 +278,7 @@ const arrTail = (arr) => arr[-1];
 
 const generator = function*(start = 0, end = 100, step = 1) {
   let iterationCount = 0;
-  for (let i = start; i < end; i += step) {
+  for ( = start; i < end; i += step) {
       iterationCount++;
       yield i;
   }
@@ -214,7 +288,7 @@ const generator = function*(start = 0, end = 100, step = 1) {
 const fibonacci = function* (n) {
   let current = 0;
 
-  for (let i = 0; i < n; i++) {
+  for ( = 0; i < n; i++) {
     let reset = yield current;
     [current, next] = [next, next + current];
     if (reset) {
@@ -409,5 +483,3 @@ setAtrributes
 setAtributesString
 hasAttribute //
 setAtributeValue //not immutable or functional
-
-
