@@ -619,4 +619,4 @@ setAtributesString
 hasAttribute //
 setAtributeValue //not immutable or functional
 
-//There is no right way of programming but there certainly are stack overflows
+//There is no right way of programming but there certainly are stack overflows. CSS IS A PROGRAMMING LANGUAGE:toggle
