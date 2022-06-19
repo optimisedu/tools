@@ -1,9 +1,6 @@
-// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change. 
-//This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle --
-//warning -- I didn't take any advice on error handling
-// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change. 
-//This is built on the shoulders of giants massive shoutout to MDN, this is trying to be purely functional. I also want to thank Lukaz Ruebbekle --
-//warning -- I didn't take any advice on error handling
+// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
+//This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
+//I also want to thank Lukaz Ruebbekle for the clarity of his talks and taking the time to give this a once over + advice -- TODO ERROR HANDLING AND TERNARYS
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //            CONTENTS
@@ -32,10 +29,13 @@
 //   --(Image calls)
 //   --(bitmap,JPEG,PNG,GIF loads)
 // --Generator and Fibonacci
-// --Mutation Observer
+// --(Node Traversal)
+// --RECUSION
+//   --(Mutation Observer)
 //   --(MEMOISATION and CACHING)
 //   --(UNESSIISCCARY BRUTE FORCE)
 // --Basic Async Promisses
+// --Random Pieces of Lego
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //____________________________________________________________________--BUILDING BLOCKS--______________________________________________________________________________
@@ -48,7 +48,7 @@ const DOT_REGEX = /\./g;
 const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
 const ISBINARY = "/^0b[01]+$/i";
-const LEN = "length";
+// const LEN = "length";
 
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
 
@@ -62,12 +62,16 @@ const POW = (int, val) => Math.pow(int, val);
 const SQRT = (int) => Math.sqrt(int);
 const randomInt = (val) => Math.floor(Math.random() * val) ; 
 const isEven = (num) => num % 2 == 0;
-const isOdd = !isEven;
+const isOdd = (num) => num % 2 != 1;
+const isOddUnFun = !isEven || isEven(num) ? true : false;
+const mid = (high, low) => high - low || high + low / 2;
+
 // --(Int manipulation)
-const toString = (int) => int.toString();
-const toInt = (str) => parseInt(str);
-const toFloat = (str) => parseFloat(str);
-const twoIntLeng = (int1, int2) => map(int1.size()+int2.size());
+const intToString = (int) => int.toString();
+const strToInt = (str) => parseInt(str);
+const strToFloat = (str) => parseFloat(str);
+const twoIntLeng = (int1, int2) => map(int1.size() + int2.size());
+const twoArrleng = (arr1, arr2) => map(arr1.length()+arr2.length());
 
 //________________________________________________________________--STRING MANIPULATION--________________________________________________________________________________
 const s = "Awkward . str / uctuure\ spe44ing - mistakes _ DELIBERATE"
@@ -107,7 +111,13 @@ const split = (str, sep) => str.split(sep);
  const splitOnDash = (str) => split(str, DASH);
  const splitOnUscore = (str) => split(str, USCORE);  
  const splitOnDot = (str) => split(str, DOT);
- const splitOnLetter = (str) => split(str, EMPTY);
+const splitOnLetter = (str) => split(str, EMPTY);
+ 
+//--(Reducinging)
+
+const reduce = (arr, fn, init) => arr.reduce(fn, init);
+const reducer = (str, fn, init) => reduce(split(str, stre.valLen()), fn, init);
+const reducingOnSpace = (str, fn, init) => reduce(split(str, SPACE), fn, init);
  
  //--(Joining)
  const join = (str, sep) => str.join(sep);
@@ -122,35 +132,21 @@ const concatWithDash = (str) => concat(str, DASH);
 const concatWithUscore = (str) => concat(str, USCORE);
 const concatWithDot = (str) => concat(str, DOT);
 const concatWithLetter = (str) => concat(str, EMPTY);
-const truncatedString = (str, maxLength) => {
-  if (str.length > maxLength) {
-    return str.slice(0, maxLength);
-  }
-  else{
-    return str;
-  }
-}
-const truncatedStringWithDots = (str, maxLength) => {
-    if(str.length > maxLength) {
-        return str.substring(0, maxLength) + DOT;
-    }
-    return str;
-}
+const truncatedString = (str, maxLength) => {//thank you lukaz
+  return str.length > maxLength ? str.slice(0, maxLength) : str;
+};
+const truncatedStringWithDot = (str, maxLength) => {//thank the
+  return str.length > maxLength ? str.slice(0, maxLength) : str.concatWithDot(str.slice(-1));// a bit excessive and concat can be
+};
 const reSize = (obj, len, key) => {
-  let reSize = [];
-  if (!key){
-    len = 1;
-    }
-    else{
-        len = key.length
-    }
+  let size = [];
+  key = !key ? len == key.length : len == 1;
   for(i = 0; i <= len; i++)
   {
-      reSize.push(obj[i])
-    }
-    return reSize
+      size.push(obj[i])
   }
-  
+    return size
+}
   //________________________________________________________Array Primatives__________________________________________________________________
   const arr = ['a','b','c']
   const arrr = [1,2,3]
@@ -241,16 +237,19 @@ const arrRemove = (arr, item) => arr.filter(i => i !== item);
     return matrix.map(row => row.map(col => col = val));
   }
   
-  const matrixSearch = (matrix, item) => {
-    for (i = 0; i < matrix.length; i++) {
-      for (let j = 0; j < matrix[i].length; j++) {
-        if (matrix[i][j] === item) {
-          return true;
-        }
+const matrixSearch = (matrix, item, key) => {
+  for (i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] === item) {
+        return true;
       }
     }
-    return false; 
   }
+}
+
+
+
+    
 
 //---------------------------------------------------------USEFUL EVENTS----------------------------------------------------------------------------------
  const hover = onmouseover();
@@ -284,40 +283,52 @@ const arrRemove = (arr, item) => arr.filter(i => i !== item);
       }
     }
     return -1;
+}
+  //the slice function significantly slows the recusion down even with a divide and conquer approach
+const binarySearchRecursive = (arr, item) => {
+  const high == arr.length - 1;
+  const low = 0; 
+  let mid = Math.floor((low + high) / 2);
+  if (arr[mid] === item) {
+    return mid;
   }
-
-  const binarySearchRecursive = (arr, item, low, high) => {
-    if (low > high) {
-      return -1;
-    }
-
-    let mid = Math.floor((low + high) / 2);
-    if (arr[mid] === item) {
-      return mid;
-    }
-    else if (arr[mid] < item) {
-      return binarySearchRecursive(arr, item, mid + 1, high);
-    }
-    else {
-      return binarySearchRecursive(arr, item, low, mid - 1);
-    }
+  else if (arr[mid] < item) {
+    return binarySearchRecursive(arr, item, mid + 1, high);
   }
-  
-//(Tree Search)
-  const treeSearch = (node, target) => {
-    if (node === null) {
-        return false;
-    }
-    if (node.value === target) {
-        return true;
-    }
-    if (treeSearch(node.left, target) || treeSearch(node.right, target)) {
-        return true;
-    }
-    else{
+  else {
+    return binarySearchRecursive(arr, item, low, mid - 1);
+  }
+}
+
+const recursiveBinarySearch = (n, arr) => {
+  let mid = Math.floor(arr.length / 2);
+  if (arr.length === 1 && arr[0] != n) {
     return false;
-    }
-    }
+  }
+  if (n === arr[mid]) {
+    return true;
+  } else if (n < arr[mid]) {
+    return recursiveBinarySearch(n, arr.slice(0, mid));
+  } else if (n > arr[mid]) {
+    return recursiveBinarySearch(n, arr.slice(mid));
+  }
+}
+
+//(Tree Search)i
+const treeSearch = (arr, item) => {
+  let low = 0;
+  let high = arr.length - 1;
+  let mid;
+  while (low <= high) {
+    mid = Math.floor((low + high) / 2);
+    arr[mid] < item ? (low = mid + 1) : (high = mid - 1);
+  }
+  return mid + 1;
+};
+
+treeSearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 3);
+
+
   
 //______________________________________________URI/encription______________________________________________________________________________________________
   
@@ -335,18 +346,18 @@ const encodeQueryString = (obj) => {//very useful for sending data to a server P
   return str.slice(0, -1);
 }
 
-const generateRandomString = (length) => {
-  let str = '';
-  for (let i = 0; i < length; i++) {
-    str += Math.random().toString(36).substring(2, 15);
+  const generateRandomString = (length) => {
+    let str = '';
+    for (let i = 0; i < length; i++) {
+      str += Math.random().toString(36).substring(2, 15);
+    }
+    console.log(str);
   }
-  console.log(str);
 
 
 
 
-
-//_____________________________________________________Genrator and fibonacci_______________________________________________________________________________________
+//_____________________________________________________Genrator and Fisbonacci_______________________________________________________________________________________
 
 const generator = function*(start = 0, end = 100, step = 1) {
   let iterationCount = 0;
@@ -369,25 +380,73 @@ const fibonacci = function* (n) {
     }
   }
 }
-
-//___________________________________________________________________Recursion_______________________________________________________________________________________________
-
-const recursion = function (n){
-    if (n < 2){
-      return 1;
+//_____________________________________________________________________Node Traversal____________________________________________________________________  
+let tail
+let head
+  const nodeAdd = (val) => {
+    let node = {
+      value: val,
+      next: null
     }
-    else{
-      return n * recusion(n - 1);
+    if (head === null) {  
+      head = node;
+      tail = node;
     }
-}
+    else {
+      tail.next = node;
+      tail = node;t
+    }
+    length++;
+  }
+  const nodeRemove = (val) => {
+    let current = head;
+    let previous = null;
+    while (current !== null) {
+      if (current.value === val) {
+        if (previous === null) {
+          head = current.next;
+        }
+        else {
+          previous.next = current.next;
+        } 
+        length--;
+        return true;
+      } 
+      previous = current;
+      current = current.next;
+    }
+    return false;
+  }
+  const nodeSearch = (val) => {
+    let current = head;
+    while (current !== null) {
+      if (current.value === val) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  } 
+  const nodeOutput = () => {
+    let current = head;
+    while (current !== null) {
+      console.log(current.value);
+      current = current.next;
+    }
+  }
 
+
+
+
+
+//_____________________________________________________________________IMAGE MANIPULATION________________________________________________________
 //web
 const getJSON = (url) => fetch(url).then(res => res.json());
 const isValidUrl = function(url){
   return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 }
 
-//image manipulation -- 
+//image manipulation -- use the sharp library - https://sharp.pixelplumbing.com/ cpp much faster than js and many functions already available
 const loadImage = function(url){
   return new Promise(function(resolve, reject){
       const image = new Image();
@@ -398,14 +457,16 @@ const loadImage = function(url){
   });
 };
 
-//_____________________________________________________________________IMAGE MANIPULATION________________________________________________________
-const imgToBitmap = function(img){
+
+  const imgToBitmap = function (img) {
+  const cache = {}
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
   canvas.height = img.height;
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0);
-  return ctx.getImageData(0, 0, canvas.width, canvas.height);
+    cache = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    return cache;
 }
 
 
@@ -441,7 +502,11 @@ loadImage(url).then(imgToJpeg);
 const imgToPng = (url) =>
 loadImage(url).then(imgToPng);
 
-//_____________________________________________________________________Mutation Observer------------------------------------------------------------------------------
+
+//___________________________________________________________________Recursion_______________________________________________________________________________________________
+
+const recursion = (n) =>  (n === 0) ? 0 : n + recursion(n - 1);
+
 const observer = new MutationObserver(function(mutations){
   mutations.forEach(function(mutation){
     if(mutation.type === 'childList'){
@@ -459,14 +524,8 @@ observer.observe(document.body, {
   characterData: true
 });
 
-//--(Memoization and Caching) -- keep the cache as a local scope
-const saveCache = (key, value) => {
-    const cache = {};
-    cache[key] = value;
-  }
-  const getCache = (key) => { 
-    return cache[key];
-  }
+//--(Memoization and Caching) 
+
 const memoize = function(fn){
   return function(...args){
     if(cache[args]){
@@ -480,28 +539,24 @@ const memoize = function(fn){
   }
 }
 
-//Complete mess of a brute force search 
-// const cacheSearch = (arr, cache) => {
-//   while(i = 0; i >= arr.length) 
-//     if(arr[i] in cache)
-//     {return arr2.map(arr[i])}
-//     i++
-//   }
+
 
   const cacheSearch = (arr, target) => {
     let cache = {};
-    for(i = 0; i < arr.length; i++){
-      if(arr[i] === target){
-        return i;
-      }
-      else{
-        cache[arr[i]] = i;
-      }
+    arr = [];
+    for (i = 0; i < arr.length; i++) {
+      target in cache ? cache[target] = i : cache[target] = -1;
+      return cache[target] ? true : false;
     }
-    return -1;
+} 
 
-    
+  //destructuring function
+  const destructuring = (obj) => { 
+    let { name, age } = obj;
+    console.log(name, age);
+  }
 
+  
 //_________________________________________________________________Getters and Setters___________________________________________________________________________
 const get = (obj, key) => obj[key];
 const set = (obj, key, value) => {obj[key] = value; return obj;};
@@ -511,9 +566,13 @@ const hasnt = (obj, key) => !obj.hasOwnProperty(key);
 const hasValue = (obj, key, value) => obj[key] === value;
 const hasntValue = (obj, key, value) => obj[key] !== value;
 
-
-
- 
+//Complete mess of a brute force search
+// const regret = (arr, cache) => {
+//   while(i = 0; i >= arr.length)
+//     if(arr[i] in cache)
+//     {return arr2.map(arr[i])}
+//     i++
+//   }
 
 //_________________________________________________________________Basic Async and Promisses___________________________________________________________________________
 const fetch = async (url, res, rej) => {
