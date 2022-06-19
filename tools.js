@@ -32,8 +32,8 @@
 // --(Node Traversal)
 // --RECUSION
 //   --(Mutation Observer)
-//   --(MEMOISATION and CACHING)
-//   --(UNESSIISCCARY BRUTE FORCE)
+//   --(memoization and caching)
+//   --(unesscarry brute force)
 // --Basic Async Promisses
 // --Random Pieces of Lego
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
