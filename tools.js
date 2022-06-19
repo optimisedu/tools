@@ -87,7 +87,7 @@ const strLast = (str, LEN) => str.strlen[-1]
  const capitalise = (str) => str.charAt(0).toUpperCase + s.slice(1);
  const decapitalise = (str) => str.charAt(0).tolowerCase + s.slice(1);
  const capitaliseWords = (str) =>//array
- str.split(space).map(capitalise).join(space);
+ str.split(SPACE).map(capitalise).join(SPACE);
  const strip = transformPipe(stripDashes, stripUnderscores);
  const startCase = transformPipe(strip, capitalizeWords);
  const pascalCase = transformPipe(startCase, stripSpaces);
