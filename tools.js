@@ -1,6 +1,6 @@
 // welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
 //This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
-//I also want to thank Lukaz Ruebbekle for the clarity of his talks and taking the time to give this a once over + advice -- TODO ERROR HANDLING AND TERNARYS
+//I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //            CONTENTS
@@ -32,8 +32,8 @@
 // --(Node Traversal)
 // --RECUSION
 //   --(Mutation Observer)
-//   --(memoization and caching)
-//   --(unesscarry brute force)
+//   --(MEMOISATION and CACHING)
+//   --(UNESSIISCCARY BRUTE FORCE)
 // --Basic Async Promisses
 // --Random Pieces of Lego
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ const DOT_REGEX = /\./g;
 const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
 const ISBINARY = "/^0b[01]+$/i";
-// const LEN = "length";
+const LEN = "length";
 
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
 
@@ -114,10 +114,10 @@ const split = (str, sep) => str.split(sep);
 const splitOnLetter = (str) => split(str, EMPTY);
  
 //--(Reducinging)
-
-const reduce = (arr, fn, init) => arr.reduce(fn, init);
-const reducer = (str, fn, init) => reduce(split(str, stre.valLen()), fn, init);
-const reducingOnSpace = (str, fn, init) => reduce(split(str, SPACE), fn, init);
+const reducingOnSpace = (str, fn, init) => str.reduce(split(str, SPACE), fn, init);
+const reducingOnDot = (str, fn, init) => str.reduce(split(str, DOT), fn, init);
+const reducingOnDash = (str, fn, init) => str.reduce(split(str, DASH), fn, init);
+const reducingOnUscore = (str, fn, init) => str.reduce(split(str, USCORE), fn, init);
  
  //--(Joining)
  const join = (str, sep) => str.join(sep);
