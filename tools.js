@@ -628,4 +628,4 @@ setAtributesString
 hasAttribute //
 setAtributeValue //not immutable or functional
 
-//There is no right way of programming but there certainly are stack overflows
+//There is no right way of programming but there certainly are stack overflows. This will do until css hrs the world.
