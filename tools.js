@@ -502,11 +502,20 @@ loadImage(url).then(imgToJpeg);
 const imgToPng = (url) =>
 loadImage(url).then(imgToPng);
 
+const getFormData = (form) => {
+  const data = new FormData(form);
+  return data;
+}
 
 //___________________________________________________________________Recursion_______________________________________________________________________________________________
 
-const recursion = (n) =>  (n === 0) ? 0 : n + recursion(n - 1);
-
+const recursion = (n) => (n == 0) ? 0 : recursion(n - 1);
+const recusionThatWorks = (n) => {
+  if (n == 0) {
+    return 0;
+  }
+  return recusionThatWorks(n - 1);
+};
 const observer = new MutationObserver(function(mutations){
   mutations.forEach(function(mutation){
     if(mutation.type === 'childList'){
@@ -619,4 +628,4 @@ setAtributesString
 hasAttribute //
 setAtributeValue //not immutable or functional
 
-//There is no right way of programming but there certainly are stack overflows. CSS IS A PROGRAMMING LANGUAGE:toggle
+//There is no right way of programming but there certainly are stack overflows
