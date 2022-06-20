@@ -143,7 +143,6 @@ const truncatedString = (str, maxLength) => {
   return str.length > maxLength ? str.slice(0, maxLength) : str;
 };
 const truncatedStringWithDot = (str, maxLength) => {
-  //thank the
   return str.length > maxLength
     ? str.slice(0, maxLength)
     : str.concatWithDot(str.slice(-1)); // a bit excessive and concat can be
@@ -306,7 +305,7 @@ const binarySearch = (arr, item) => {
   }
   return -1;
 };
-//the slice function significantly slows the recusion down even with a divide and conquer approach
+//the slice function significantly slows the recusion down even with a divide and conquer approach this is faster
 const binarySearchRecursive = (arr, item) => {
   let high = arr[-1];
   let low = 0;
