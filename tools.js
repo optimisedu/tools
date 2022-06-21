@@ -1,6 +1,7 @@
 // welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
 //This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
 //I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
+//Potentially this could be used as a teaching resource after a lot of cleaning. If anybody wants input it would be appreciated.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //            CONTENTS
@@ -39,6 +40,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //____________________________________________________________________--BUILDING BLOCKS--______________________________________________________________________________
+// const or constants are "block scoped". Think of them as individual containers. Their name cannot be redeclared, however they store a value as an object. 
+//That value can be any primative type, but if they store arrays[] or hashes{} then the objects can be manipulated. This is extremely useful as you will see.
+//The old way of storing  variables was var. You will find it in a lot of legacy code. Vars still retain some usefulness as unlike lets or consts they get 
+//"hoisted" to the top of the JS file. This is because javascript runs top to bottom. Toggle is a ver useful function. Arrow functionsare not required
+//nor is the ternary operator. They are a relatively new style allowing you have "implicit return" so you can tell ? is a truthy value and : is false. Toggle reverses that
+
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
@@ -52,6 +59,8 @@ const LEN = "length";
 const toggle = () => (true ? false : true);
 
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
+//The let variable can be recalled multiple times. There are some coding patterns which are near universal -- i is iterate, and if you have a lot of for loops
+//it is often worth letting i globally (as opposed to each time you have parenthesis()). As a beginner learning code knowing the operators inside out is a great help
 
 let i;
 const ADD = (int, val) => int + val;
@@ -75,6 +84,9 @@ const twoIntLeng = (int1, int2) => map(int1.size() + int2.size());
 const twoArrleng = (arr1, arr2) => map(arr1.length() + arr2.length());
 
 //________________________________________________________________--STRING MANIPULATION--________________________________________________________________________________
+//I hope this code has been self explanatory. For strings I wanted to show that there are many ways of achieving the same goal. Javascript is a fairly heavy
+//                                                  language so different methods suit different approaches
+
 const str = "Awkward . str / uctuure spe44ing - mistakes _ DELIBERATE";
 const strAdd = (str, item) => str + item;
 const strLen = (str) => str.LEN;
@@ -143,6 +155,7 @@ const truncatedString = (str, maxLength) => {
   return str.length > maxLength ? str.slice(0, maxLength) : str;
 };
 const truncatedStringWithDot = (str, maxLength) => {
+  //thank the
   return str.length > maxLength
     ? str.slice(0, maxLength)
     : str.concatWithDot(str.slice(-1)); // a bit excessive and concat can be
@@ -155,7 +168,7 @@ const reSize = (obj, len, key) => {
   }
   return size;
 };
-//________________________________________________________Array
+//________________________________________________________Array_____________________________________________________________________________________
 const arr = ["a", "b", "c"];
 const arrr = [1, 2, 3];
 const arrHead = (arr) => arr[0];
@@ -305,7 +318,7 @@ const binarySearch = (arr, item) => {
   }
   return -1;
 };
-//the slice function significantly slows the recusion down even with a divide and conquer approach this is faster
+//the slice function significantly slows the recusion down even with a divide and conquer approach
 const binarySearchRecursive = (arr, item) => {
   let high = arr[-1];
   let low = 0;
@@ -509,6 +522,9 @@ const getFormData = (form) => {
 };
 
 //___________________________________________________________________Recursion__________________________________________________________________________________________
+//If you have followed so far this goes back to the start - higher level functions calling themselves to create a loop and stacking a cache of data.
+//      This is litterally your stack and it can overflow, or return at values lightning fast because they are already stored.
+
 
 const recursion = (n) => (n == 0 ? 0 : recursion(n - 1));
 const recusionThatWorks = (n) => {
@@ -600,6 +616,7 @@ for (i = 0; i < arr.length; i++) {
   let loopy;
   console.log(loopy);
 }
+
 
 //_______________________________________________EASE OF USE ________________________________
 
