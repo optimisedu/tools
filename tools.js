@@ -171,28 +171,20 @@ const reSize = (obj, len, key) => {
 //________________________________________________________Array_____________________________________________________________________________________
 const arr = ["a", "b", "c"];
 const arrr = [1, 2, 3];
+const arr2 = arr.map((item) => item + 1);
+const mapHOF = (fn, arr) => arr.map(fn);
 const arrHead = (arr) => arr[0];
 const arrTail = (arr) => arr[-1];
-const filter = (fn, arr) => arr.filter(fn);
-const arr2 = arr.map((item) => item + 1);
-const pop = (arr) => arr.pop();
-const arrUnset = (arr) => arr.unset();
+//example of why this would work much better in typescript
+const dotAtEnd = (arr) => arr.every(concatWithDot(arr[i]));
+const quickSearch = (item, arr) => arr.includes(item) ? item : false
 const _filterEven = (arr) => arr.filter(isEven);
+const isEvenArr = (arr) => isEven(arr.length - 1) ? true : false;
 const arrMap = (input, output) => output.map(input);
 const mapWith = (input, output) => output.map(input.forEach(input.splitWith));
-const mapWithSpace = (input, output) =>
-  output.map(input.forEach(input.splittWithSpace));
-const mapWithDash = (input, output) =>
-  output.map(input.forEach(input.splitWithDash));
-const mapWithUscore = (input, output) =>
-  output.map(input.forEach(input.splitWithUscore));
-const mapWithDot = (input, output) =>
-  output.map(input.forEach(input.splitWithDot));
 const mapWithLetter = (input, output) =>
   output.map(input.forEach(input.splitWithLetter));
-const arrRemoveDupes = (arr) => [...new Set(arr)];
-const arrFilterDupes = (arr, fn) => [...new Set(arr.filter(fn))];
-const arrRemoveDupesWith = (arr, fn) => [...new Set(arr.filter(fn))];
+const arrRemoveDupes = (arr, item) => [...new Set(arr.filter(fn))];
 const arrRemoveDupesWithSpace = (arr, fn) => [
   ...new Set(arr.filter(fn).splitWithSpace()),
 ];
@@ -466,6 +458,25 @@ const getJSON = (url) => fetch(url).then((res) => res.json());
 const isValidUrl = function (url) {
   return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 };
+const getImage = (url) => {
+  if (isValidUrl(url)) {
+    return getJSON(url);
+  }
+  return null;
+}
+
+const getImageData = (url) => {
+  return getImage(url).then((img) => {
+    let canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    let ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    return ctx.getImageData(0, 0, img.width, img.height);
+  }
+  );
+}
+
 
 //image manipulation -- use the sharp library - https://sharp.pixelplumbing.com/ cpp much faster than js and many functions already available
 const loadImage = function (url) {
@@ -478,6 +489,18 @@ const loadImage = function (url) {
     image.src = url;
   });
 };
+const imgConverter = function (imgPath, extension, newImg) {
+  imgPath = promt("enter the path to the image you want to convert")
+  extension = promt("enter the suffix you want to convet to")
+  imgPath.split('.')[0];
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(imgPath, 0, 0);
+  newImg = imagePath.replace(imgPath + DOT +` ${ extension }`)
+  return canvas.toDataURL(newImg);
+};
 
 const imgToBitmap = function (img) {
   const cache = {};
@@ -487,7 +510,7 @@ const imgToBitmap = function (img) {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);
   cache = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  return cache;
+    return canvas.toDataURL("image/png");
 };
 
 const imgTopng = function (img) {
@@ -524,10 +547,11 @@ const getFormData = (form) => {
 //___________________________________________________________________Recursion__________________________________________________________________________________________
 //If you have followed so far this goes back to the start - higher level functions calling themselves to create a loop and stacking a cache of data.
 //      This is litterally your stack and it can overflow, or return at values lightning fast because they are already stored.
-
+const globalCache = {};
 
 const recursion = (n) => (n == 0 ? 0 : recursion(n - 1));
-const recusionThatWorks = (n) => {
+
+const recusionBrokenDown = (n) => {
   if (n == 0) {
     return 0;
   }
