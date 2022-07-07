@@ -1,4 +1,4 @@
-// welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
+//Welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
 //This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
 //I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
 //Potentially this could be used as a teaching resource after a lot of cleaning. If anybody wants input it would be appreciated.
@@ -40,11 +40,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //____________________________________________________________________--BUILDING BLOCKS--______________________________________________________________________________
-// const or constants are "block scoped". Think of them as individual containers. Their name cannot be redeclared, however they store a value as an object. 
-//That value can be any primative type, but if they store arrays[] or hashes{} then the objects can be manipulated. This is extremely useful as you will see.
-//The old way of storing  variables was var. You will find it in a lot of legacy code. Vars still retain some usefulness as unlike lets or consts they get 
-//"hoisted" to the top of the JS file. This is because javascript runs top to bottom. Toggle is a ver useful function. Arrow functionsare not required
-//nor is the ternary operator. They are a relatively new style allowing you have "implicit return" so you can tell ? is a truthy value and : is false. Toggle reverses that
+//const or constants are "block scoped". Think of them as individual containers. Their name cannot be redeclared, however they store a value as an object. 
+//That value can be any primative type, but if they store arrays[] or hashes{hash, key} then the objects can be manipulated. This is extremely useful as you will see.
+//The old way of storing  variables was var. You will find it in a lot of legacy code. Vars still retain some usefulness as unlike let or const they get 
+//"hoisted" to the top of their scope. This is because javascript in series top to bottom. Toggle is a very useful functor. Arrow functions are not required
+//nor is the ternary operator. They are a relatively new style (es6) allowing you have "implicit return" so you can tell ? is a truthy value and : is false. 
+//Toggle reverses that
 
 const DASH = "-";
 const USCORE = "_";
@@ -56,7 +57,7 @@ const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
 const ISBINARY = "/^0b[01]+$/i";
 const LEN = "length";
-const toggle = () => (true ? false : true);
+const toggle = (e) => (true ? false : true);
 
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
 //The let variable can be recalled multiple times. There are some coding patterns which are near universal -- i is iterate, and if you have a lot of for loops
@@ -76,7 +77,7 @@ const isOdd = (num) => num % 2 != 1;
 const isOddUnFun = !isEven || isEven ? false : true;
 const mid = (high, low) => high - low || high + low / 2;
 
-// --(Int manipulation)
+// --(Int manipulation)   
 const intToString = (int) => int.toString();
 const strToInt = (str) => parseInt(str);
 const strToFloat = (str) => parseFloat(str);
@@ -155,10 +156,9 @@ const truncatedString = (str, maxLength) => {
   return str.length > maxLength ? str.slice(0, maxLength) : str;
 };
 const truncatedStringWithDot = (str, maxLength) => {
-  //thank the
   return str.length > maxLength
     ? str.slice(0, maxLength)
-    : str.concatWithDot(str.slice(-1)); // a bit excessive and concat can be
+    : str.concatWithDot(str.slice(-1)); // a bit excessive and concat can be used
 };
 const reSize = (obj, len, key) => {
   let size = [];
@@ -213,23 +213,34 @@ const firstLastSum = (a, b, arr) =>
   arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
 [...arr].sort((a, b) => a + b);
 const firstLastReduceSort = (a, b, arr) => [...arr].sort((a, b) => a - b);
-const arrRemoveAll = (arr, item) => arr.filter((i) => i !== item);
+const arrItemRemove = (arr, item) => arr.filter((i) => i !== item);
 
 //_________________________________________________________________ Arrays________________________________________________________________________
 
 // 2d array
 const twoDArray = (rows, cols, val) => {
   let arr = [];
-  for (i = 0; i < rows; i++) {
-    arr[i] = [];
-    for (let j = 0; j < cols; j++) {
-      arr[i][j] = val;
-    }
-  }
+  // for (i = 0; i < rows; i++) {
+  //   arr[i] = [];
+  //   for (let j = 0; j < cols; j++) {
+  //     arr[i][j] = val;
+  //   }
+  // }
   // return arr;
   // functional
   return arr.map((row) => row.map((col) => (col = val)));
 };
+//very basic to be improved upon - improve on concat
+const flattenArr = (arr) => {
+  return arr.reduce((acc, curr) => {
+    if (Array.isArray(curr)) {
+      return acc.concat(flattenArr(curr));
+    }
+    return acc.concat(curr);
+  }, []);
+}
+
+
 // 3d array
 const threeDArray = (rows, cols, depths, val) => {
   let arr = [];
@@ -602,6 +613,10 @@ const destructuring = (obj) => {
 };
 
 //_________________________________________________________________Getters and Setters and Hashes_______________________________________________________________________
+
+
+const outercache = {}
+const obj2 = { a: 1, b: 2, c: 3 }
 const get = (obj, key) => obj[key];
 const set = (obj, key, value) => {
   obj[key] = value;
@@ -640,7 +655,6 @@ for (i = 0; i < arr.length; i++) {
   let loopy;
   console.log(loopy);
 }
-
 
 //_______________________________________________EASE OF USE ________________________________
 
