@@ -1,6 +1,7 @@
 //Welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
-//This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
-//I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
+//This is built on the shoulders of giants massive shoutout to MDN, I started trying to keep all these functions as pure as possible but am not remaking _lowdash.
+//I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I only started unit testing as this became a
+//large project - sections with comments have likely been tested for functionality. Speed tests are coming.
 //Potentially this could be used as a teaching resource after a lot of cleaning. If anybody wants input it would be appreciated.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,9 +22,7 @@
 //   --(Matrix Creation)
 //   --(Matrix Search)
 //  --Tree Search
-// --USEFUL EVENTS
 // --(FUNCTIONAL) SEARCH METHODS
-// --USEFUL EVENTS
 // --URI MANIPULATION
 // --IMAGE MANIPULATION, *useful, but use "npm i sharp" for C performance*
 //   --(Canvas)
@@ -35,7 +34,9 @@
 //   --(Mutation Observer)
 //   --(MEMOISATION and CACHING)
 //   --(UNESSIISCCARY BRUTE FORCE)
-// --Basic Async Promisses
+// --BASIC ASYNC PROMISES
+// --USEFUL EVENTS
+// --CURRYING AND SUMMERY
 // --Random Pieces of Lego
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +46,7 @@
 //The old way of storing  variables was var. You will find it in a lot of legacy code. Vars still retain some usefulness as unlike let or const they get 
 //"hoisted" to the top of their scope. This is because javascript in series top to bottom. Toggle is a very useful functor. Arrow functions are not required
 //nor is the ternary operator. They are a relatively new style (es6) allowing you have "implicit return" so you can tell ? is a truthy value and : is false. 
-//Toggle reverses that
+//Toggle reverses that.
 
 const DASH = "-";
 const USCORE = "_";
@@ -554,12 +555,97 @@ const getFormData = (form) => {
   const data = new FormData(form);
   return data;
 };
+//_________________________________________________________________Getters and Setters and Hashes_______________________________________________________________________
+//Lots of playing can be done with this lego -- specially mixed with some of the array functions and caching covered in the next section
 
+
+const obj2 = { a: 1, b: 2, c: 3 }
+const obj3 = { d: 4, e: 5, f: 6 }
+
+const get = (obj, key) => obj[key];
+const set = (obj, key, value) => 
+{obj.hasOwnProperty(key) ? obj.key != value : obj[key] = value;}
+const unset = (obj, key) => {
+  delete obj[key];
+  return obj;
+};
+const has = (obj, key) => obj.hasOwnProperty(key);
+const keys = obj => Object.keys(obj);
+const values = obj => Object.values(obj);
+const entries = obj => Object.entries(obj);
+const merge = (obj1, obj2) => {
+    for (let key in obj2) {
+        obj1[key] = obj2[key];
+    }
+    return obj1;
+}
+
+const mergeWith = (obj1, obj2, fn) => {
+    for (let key in obj2) {
+        obj1[key] = fn(obj1[key], obj2[key]);
+    }
+    return obj1;
+}
+const pick = (obj, keys) => {
+    let newObj = {};
+    for (let key in obj) {
+        if (keys.includes(key)) {
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
+}
+
+const omit = (obj, keys) => {
+    let newObj = {};
+    for (let key in obj) {
+        if (!keys.includes(key)) {
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
+}
+const pickBy = (obj, fn) => {
+    let newObj = {};
+    for (let key in obj) { 
+        if (fn(obj[key])) {
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
+}
+
+const omitBy = (obj, fn) => {
+    let newObj = {};
+    for (let key in obj) {
+        if (!fn(obj[key])) {
+            newObj[key] = obj[key];
+        }
+    }
+    return newObj;
+}
+
+const mapKeys = (obj, fn) => {
+    let newObj = {};
+    for (let key in obj) {
+        newObj[fn(key)] = obj[key];
+    }
+    return newObj;
+}
+
+
+//Complete mess of a brute force search
+// const regret = (arr, cache) => {
+//   while(i = 0; i >= arr.length)
+//     if(arr[i] in cache)
+//     {return arr2.map(arr[i])}
+//     i++
+//   }
 //___________________________________________________________________Recursion__________________________________________________________________________________________
 //If you have followed so far this goes back to the start - higher level functions calling themselves to create a loop and stacking a cache of data.
 //      This is litterally your stack and it can overflow, or return at values lightning fast because they are already stored.
-const globalCache = {};
 
+const globalCache = {};
 const recursion = (n) => (n == 0 ? 0 : recursion(n - 1));
 
 const recusionBrokenDown = (n) => {
@@ -612,37 +698,6 @@ const destructuring = (obj) => {
   console.log(name, age);
 };
 
-//_________________________________________________________________Getters and Setters and Hashes_______________________________________________________________________
-
-
-const outercache = {}
-const obj2 = { a: 1, b: 2, c: 3 }
-const get = (obj, key) => obj[key];
-const set = (obj, key, value) => {
-  obj[key] = value;
-  return obj;
-};
-const unset = (obj, key) => {
-  delete obj[key];
-  return obj;
-};
-const reUse = (obj, key) => {
-  let value = obj[key];
-  delete obj[key];
-  return value;
-};
-const has = (obj, key) => obj.hasOwnProperty(key);
-const hasnt = (obj, key) => !obj.hasOwnProperty(key);
-const hasValue = (obj, key, value) => obj[key] === value;
-const hasntValue = (obj, key, value) => obj[key] !== value;
-
-//Complete mess of a brute force search
-// const regret = (arr, cache) => {
-//   while(i = 0; i >= arr.length)
-//     if(arr[i] in cache)
-//     {return arr2.map(arr[i])}
-//     i++
-//   }
 
 //---------------------------------------------------------USEFUL EVENTS----------------------------------------------------------------------------------
 const hover = onmouseover();
@@ -656,6 +711,17 @@ for (i = 0; i < arr.length; i++) {
   console.log(loopy);
 }
 
+//---------------------------------------------------------CURRYING----------------------------------------------------------------------------------
+//In my personal opinion currying is the apex of functional programming defining and calling itself, in larger more practical design systems.
+//Currying can save a lot of time . The last 600 lines has been a monad - a personal toolbox which is a self contained system.
+//If you have followed, than the most useful of functions which I have defined are curried.
+
+const curryFunction = (fn, ...args) => {
+  return (...moreArgs) => fn(...args, ...moreArgs);
+}
+const add = (a, b) => a + b;
+const add5 = curryFunction(add, 5);
+console.log(add5(10));
 //_______________________________________________EASE OF USE ________________________________
 
 //Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes
