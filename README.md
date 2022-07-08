@@ -40,6 +40,10 @@ sections with comments have likely been tested for functionality.
 While I call this mine it is fully open source and I invite people to write the functional sections in their own words.
 
 *TODO*
-- spellcheck 
+- Spellcheck 
 - Add your ideas, and thoughts in comments. Play with the lego **ala Functional Programming part 2, see what works together, make your monads, do module export, add types. Bend this to your will
 - I am looking to blog about micro-optimisattions so if you can think of a method **add it
+- Add latest **ES(X)** functionality
+- **BENCHMARK**
+- Please add any additions recursively so that it is microptinisations all the way down. While my version control currently looks like an IP address, that's just because (n) is 4
+- If you fork and module export or any part of this ends up on NPM please minify it. The carbon footprint grows exponentially, but I am an optimisation nerd
