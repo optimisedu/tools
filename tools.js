@@ -1,14 +1,13 @@
 //Welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
-//This is built on the shoulders of giants massive shoutout to MDN, I started trying to keep all these functions as pure as possible but am not remaking _lowdash.
-//I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I only started unit testing as this became a
-//large project - sections with comments have likely been tested for functionality. Speed tests are coming.
+//This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
+//I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
 //Potentially this could be used as a teaching resource after a lot of cleaning. If anybody wants input it would be appreciated.
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //            CONTENTS
 //__________________________________________________________________________________________________
 //
-// --BUILDING BLOCKS
+// --Lego Blocks | Functional programming part 1
 // --INTEGER BASICS
 //    --(Int Manipulation)
 // --STRING MANIPULATION
@@ -16,6 +15,7 @@
 //    --(Replacing)
 //    --(Splitting)
 //    --(Joining)
+//  --Functors | Functional Programming Part 2
 // --CREATING ARRAYS AND MATRICIES
 //    --(Array Primatives)
 //   --(Array Creation)
@@ -30,17 +30,17 @@
 //   --(bitmap,JPEG,PNG,GIF loads)
 // --Generator and Fibonacci
 // --(Node Traversal)
-// --RECUSION
+// --RECUSION AND MEMORY MANAGEMENT
 //   --(Mutation Observer)
 //   --(MEMOISATION and CACHING)
 //   --(UNESSIISCCARY BRUTE FORCE)
 // --BASIC ASYNC PROMISES
 // --USEFUL EVENTS
-// --CURRYING AND SUMMERY
+// --FUNCTIONAL PROGRAMMING PART (N) CURRYING AND SUMMERY
 // --Random Pieces of Lego
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//____________________________________________________________________--BUILDING BLOCKS--______________________________________________________________________________
+//____________________________________________________________________--Lego Blocks | Functional programming part 1--______________________________________________________________________________
 //const or constants are "block scoped". Think of them as individual containers. Their name cannot be redeclared, however they store a value as an object. 
 //That value can be any primative type, but if they store arrays[] or hashes{hash, key} then the objects can be manipulated. This is extremely useful as you will see.
 //The old way of storing  variables was var. You will find it in a lot of legacy code. Vars still retain some usefulness as unlike let or const they get 
@@ -48,11 +48,11 @@
 //nor is the ternary operator. They are a relatively new style (es6) allowing you have "implicit return" so you can tell ? is a truthy value and : is false. 
 //Toggle reverses that.
 
+const DOT = ".";
 const DASH = "-";
 const USCORE = "_";
 const SPACE = " ";
 const EMPTY = "";
-const DOT = ".";
 const DOT_REGEX = /\./g;
 const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
@@ -170,14 +170,14 @@ const reSize = (obj, len, key) => {
   return size;
 };
 //________________________________________________________Array_____________________________________________________________________________________
-const arr = ["a", "b", "c"];
+//____________________________________________________________________________________________________________________________________________________
 const arrr = [1, 2, 3];
 const arr2 = arr.map((item) => item + 1);
 const mapHOF = (fn, arr) => arr.map(fn);
-const arrHead = (arr) => arr[0];
-const arrTail = (arr) => arr[-1];
-//example of why this would work much better in typescript
+const arrHead = (arr) => arr[0];//start| - are probably better function names for real usage
+const arrTail = (arr) => arr[-1];//end | - but I like thinking of 1d arrays as a snake [<--->]
 const dotAtEnd = (arr) => arr.every(concatWithDot(arr[i]));
+//example of why this would work much better in typescript
 const quickSearch = (item, arr) => arr.includes(item) ? item : false
 const _filterEven = (arr) => arr.filter(isEven);
 const isEvenArr = (arr) => isEven(arr.length - 1) ? true : false;
@@ -211,11 +211,23 @@ const firstLastSort = (a, b, arr) => {
   a == b ? arr.sort() : arr.sort((a, b) => a - b);
 };
 const firstLastSum = (a, b, arr) =>
-  arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
+arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
 [...arr].sort((a, b) => a + b);
 const firstLastReduceSort = (a, b, arr) => [...arr].sort((a, b) => a - b);
 const arrItemRemove = (arr, item) => arr.filter((i) => i !== item);
-
+//_____________________________________________________________________Functional Programing Part 1_________________________________________________
+//now things are starting to get a bit more complex we can do things like sort, filter, map, reduce, etc. These are the basic higher order functions 
+//(HOFs). Functional programming is much more fun when you introduce functions which take and return other functions.
+const arr = ["a", "b", "c"];
+const arrPosition = (arr, target) => ((quickSearch(arr, target) ? arr.indexOf(target) : console.log(false))) ;
+//This where things start to get a bit more interesting, arrPosition above us is a bit more defensive than the index of method, some people may have
+//All the functions called by our HOF work stand alone. quickSearch only returns true or false, indexOf returns -1 or a number however both 
+//throw errors if there isn't an array or the target isn't found. If we go back to our --Ineger Manipulation-- saying is 
+const Z = (X) => X
+const Y = (X, Y) => Z + X;
+//This is Y, this is where functional programming becomes interesting, and Y I am making notes on the evolution of my tools for the open source community
+//In this case Z - or arrPosition are monads - basic design patterns, XOR functions. Many names applicable in many ways this is not disimilar to X(N)OR Logic gates
+//Compact programs translate across all langauges.Z and X may always be the same but add them together and thats Y
 //_________________________________________________________________ Arrays________________________________________________________________________
 
 // 2d array
@@ -557,7 +569,7 @@ const getFormData = (form) => {
 };
 //_________________________________________________________________Getters and Setters and Hashes_______________________________________________________________________
 //Lots of playing can be done with this lego -- specially mixed with some of the array functions and caching covered in the next section
-
+//also tested search function work with these objects - --See FUNCTIONAL PROGRAMMING PART 2-- 
 
 const obj2 = { a: 1, b: 2, c: 3 }
 const obj3 = { d: 4, e: 5, f: 6 }
@@ -683,14 +695,6 @@ const memoize = function (fn) {
   };
 };
 
-const cacheSearch = (arr, target) => {
-  let cache = {};
-  arr = [];
-  for (i = 0; i < arr.length; i++) {
-    target in cache ? (cache[target] = i) : (cache[target] = -1);
-    return cache[target] ? true : false;
-  }
-};
 
 //destructuring function
 const destructuring = (obj) => {
@@ -711,7 +715,7 @@ for (i = 0; i < arr.length; i++) {
   console.log(loopy);
 }
 
-//---------------------------------------------------------CURRYING----------------------------------------------------------------------------------
+//--------------------------------------------------------FUNCTIONAL PROGRAMMING PART (N) CURRYING--------------------------------------------------------------------------
 //In my personal opinion currying is the apex of functional programming defining and calling itself, in larger more practical design systems.
 //Currying can save a lot of time . The last 600 lines has been a monad - a personal toolbox which is a self contained system.
 //If you have followed, than the most useful of functions which I have defined are curried.
