@@ -30,7 +30,7 @@
 //   --(bitmap,JPEG,PNG,GIF loads)
 // --Generator and Fibonacci
 // --(Node Traversal)
-// --RECUSION AND MEMORY MANAGEMENT
+// --Functional Programming Part 3 | RECUSION AND MEMORY MANAGEMENT
 //   --(Mutation Observer)
 //   --(MEMOISATION and CACHING)
 //   --(UNESSIISCCARY BRUTE FORCE)
