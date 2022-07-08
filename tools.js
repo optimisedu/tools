@@ -657,7 +657,7 @@ const mapKeys = (obj, fn) => {
 // Functional programming patterns are so well recognised because while the syntax may shift the idea behind it goes back many decades (thats centuries in programmer years)
 // {function1, function2, function3} is a fairly clean stack, scripts make their calls line by line in order. Moore's Law is often represented as computer power doubles every
 // two years. Early programmers had to be clever with their scripts to prevent their stacks taking up more space than their memory had and meaning good code can fail on bad devices.
-// While for loops should be known to you by now, they perform a lot of work very quickly, however recursion is the functional way of achieving the same thing,
+// While for iteration should be known to you by now, they perform a lot of work very quickly, however recursion is the functional way of achieving the same thing,
 // clever hackers have reinvented this wheel over. What if a function could call itself. Why though? 
 const globalCache = {};
 const recursion = (n) => (n == 0 ? 0 : recursion(n - 1));
