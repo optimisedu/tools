@@ -7,8 +7,8 @@
 //            CONTENTS
 //__________________________________________________________________________________________________
 //
-// --Lego Blocks | Functional programming part 1
-// --INTEGER BASICS
+// **--Lego Blocks | Functional programming part 1
+// --INTEGER BASICS**
 //    --(Int Manipulation)
 // --STRING MANIPULATION
 //    --(Casing)
@@ -201,6 +201,7 @@ const arrRemoveDupesWithDot = (arr, fn) => [
 const arrRemoveDupesWithLetter = (arr, fn) => [
   ...new Set(arr.filter(fn).splitWithLetter()),
 ];
+
 const arrAdd = (arr, item) => [...arr, item];
 const sumAll = (arr) => arr.reduce((acc, curr) => acc + curr, 0);
 const arrRemove = (arr, item) => arr.filter((i) => i !== item);
@@ -219,7 +220,9 @@ const arrItemRemove = (arr, item) => arr.filter((i) => i !== item);
 //now things are starting to get a bit more complex we can do things like sort, filter, map, reduce, etc. These are the basic higher order functions 
 //(HOFs). Functional programming is much more fun when you introduce functions which take and return other functions.
 const arr = ["a", "b", "c"];
-const arrPosition = (arr, target) => ((quickSearch(arr, target) ? arr.indexOf(target) : console.log(false))) ;
+const arrPosition = (arr, target) =>
+  ((quickSearch(arr, target) ? arr.indexOf(target) : console.log(false)));
+  arrPosition(a,b)
 //This where things start to get a bit more interesting, arrPosition above us is a bit more defensive than the index of method, some people may have
 //All the functions called by our HOF work stand alone. quickSearch only returns true or false, indexOf returns -1 or a number however both 
 //throw errors if there isn't an array or the target isn't found. If we go back to our --Ineger Manipulation-- saying is 
@@ -576,7 +579,8 @@ const obj3 = { d: 4, e: 5, f: 6 }
 
 const get = (obj, key) => obj[key];
 const set = (obj, key, value) => 
-{obj.hasOwnProperty(key) ? obj.key != value : obj[key] = value;}
+{ obj.hasOwnPrfoperty(key) ? obj.key != value : obj[key] = value; }
+
 const unset = (obj, key) => {
   delete obj[key];
   return obj;
@@ -590,6 +594,14 @@ const merge = (obj1, obj2) => {
         obj1[key] = obj2[key];
     }
     return obj1;
+}
+
+const enumerate = (obj) => {
+  let arr = [];
+  for (let key in obj) {
+    arr.push([key, obj[key]]);
+  }
+  return arr;
 }
 
 const mergeWith = (obj1, obj2, fn) => {
