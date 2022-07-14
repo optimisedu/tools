@@ -72,7 +72,7 @@ const DIV = (int, val) => int / val;
 const MOD = (int, val) => int % val;
 const POW = (int, val) => Math.pow(int, val);
 const SQRT = (int) => Math.sqrt(int);
-const randomInt = (val) => Math.floor(Math.random() * val);
+const randomInt = (val) => Math.floor(Math.random() * (val - 1));
 const isEven = (num) => num % 2 == 0;
 const isOdd = (num) => num % 2 != 1;
 const isOddUnFun = !isEven || isEven ? false : true;
@@ -84,6 +84,18 @@ const strToInt = (str) => parseInt(str);
 const strToFloat = (str) => parseFloat(str);
 const twoIntLeng = (int1, int2) => map(int1.size() + int2.size());
 const twoArrleng = (arr1, arr2) => map(arr1.length() + arr2.length());
+
+//PRACTICAL USE: Generate a random color - this saves writing the whole randomInt function, 
+//which saves generating a random color line line ETC
+
+
+function generateRandomColor() {
+    const hue = randomInt(360);
+    const sat = randomInt(100) + "%";
+    const lgt = randomInt(100) + "%";
+    const a = 1;
+    return "hsl(" + hue + "deg, " + sat + ", " + lgt + "," + a + ")";
+  }
 
 //________________________________________________________________--STRING MANIPULATION--________________________________________________________________________________
 //I hope this code has been self explanatory. For strings I wanted to show that there are many ways of achieving the same goal. Javascript is a fairly heavy
@@ -161,6 +173,8 @@ const truncatedStringWithDot = (str, maxLength) => {
     ? str.slice(0, maxLength)
     : str.concatWithDot(str.slice(-1)); // a bit excessive and concat can be used
 };
+
+//see --(GETTERS AND SETTERS) info
 const reSize = (obj, len, key) => {
   let size = [];
   key = !key ? len == key.length : len == 1;
@@ -169,6 +183,19 @@ const reSize = (obj, len, key) => {
   }
   return size;
 };
+//Here string manipulation starts to change into integers, binary recursion and closures
+const binary = (num) => {
+  let binary = "";
+  while (num > 0) {
+    binary = (num % 2) + binary;
+    num = Math.floor(num / 2);
+  }
+  return binary;
+}
+console.log(binary(10));
+
+
+
 //________________________________________________________Array_____________________________________________________________________________________
 //____________________________________________________________________________________________________________________________________________________
 const arrr = [1, 2, 3];
@@ -629,6 +656,7 @@ const omit = (obj, keys) => {
     }
     return newObj;
 }
+
 const pickBy = (obj, fn) => {
     let newObj = {};
     for (let key in obj) { 
@@ -678,7 +706,7 @@ const recusionBrokenDown = (n) => {
   if (n == 0) {
     return 0;
   }
-  return recusionThatWorks(n - 1);
+  return recursionBrokenDown(n - 1);
 };
 // recursion cycles over a function until a nice binary value is fulfilled. On top of this memoization, caching and the callstack really evolved.
 const observer = new MutationObserver(function (mutations) {
