@@ -39,6 +39,11 @@ sections with comments have likely been tested for functionality.
 # contributing
 While I call this mine it is fully open source and I invite people to write the functional sections in their own words.
 
+This starts with a dot and continues to the apex of my understanding ofjavascript. As such it will recurse on. The functors aren't the opoint,
+if you can't explain it simply you don't understand it well enough so please jump from section to section pinching what you will. Afterall, 
+these are well recognised patterns that started as holes in punchcard!
+
+
 *TODO*
 - Spellcheck 
 - Add your ideas, and thoughts in comments. Play with the lego **ala Functional Programming part 2, see what works together, make your monads, do module export, add types. Bend this to your will
