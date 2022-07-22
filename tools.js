@@ -258,6 +258,9 @@ const Y = (X, Y) => Z + X;
 //This is Y, this is where functional programming becomes interesting, and Y I am making notes on the evolution of my tools for the open source community
 //In this case Z - or arrPosition are monads - basic design patterns, XOR functions. Many names applicable in many ways this is not disimilar to X(N)OR Logic gates
 //Compact programs translate across all langauges.Z and X may always be the same but add them together and thats Y
+const randomCoord = (x, y) => [randomInt(x), randomInt(y)];
+//calling our randomInt function twice results in a very clean way of getting a random coordinate on canvas. See --(Image Manipulation) for more on canvases
+//and size of arrays and matrices for more recursive randomintsation 
 //_________________________________________________________________ Arrays________________________________________________________________________
 
 // 2d array
@@ -760,7 +763,7 @@ for (i = 0; i < arr.length; i++) {
 
 //--------------------------------------------------------FUNCTIONAL PROGRAMMING PART (N) CURRYING--------------------------------------------------------------------------
 //In my personal opinion currying is the apex of functional programming defining and calling itself, in larger more practical design systems.
-//Currying can save a lot of time . The last 600 lines has been a monad - a personal toolbox which is a self contained system.
+//Currying can save a lot of time . The last 600 lines has been a monoid - a personal toolbox which is a self contained system.
 //If you have followed, than the most useful of functions which I have defined are curried.
 
 const curryFunction = (fn, ...args) => {
