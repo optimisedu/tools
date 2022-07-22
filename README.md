@@ -39,9 +39,10 @@ sections with comments have likely been tested for functionality.
 # Contributing
 While I call this mine it is fully open source and I invite people to write the functional sections in their own words.
 
-This starts with a dot and continues to the apex of my understanding ofjavascript. As such it will recurse on. The functors aren't the opoint,
-if you can't explain it simply you don't understand it well enough so please jump from section to section pinching what you will. Afterall, 
-these are well recognised patterns that started as holes in punchcard!
+This starts with a dot and continues to the apex of my understanding of functions. As such it will recurse on. The functors aren't the point.
+If you can't explain it simply you don't understand it well enough so please jump from section to section pinching what you will. Afterall, 
+these are well recognised patterns that started as holes in punchcard! What I would really like to see is forks with other people explaining
+these patterns in their own words.
 
 *Done*
 -Capitolised "contributing"
