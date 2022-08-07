@@ -199,19 +199,25 @@ console.log(binary(10));
 //________________________________________________________Array_____________________________________________________________________________________
 //____________________________________________________________________________________________________________________________________________________
 const arrr = [1, 2, 3];
-const arr2 = arr.map((item) => item + 1);
+const arr2 = arrr.map((item) => item + 1);
 const mapHOF = (fn, arr) => arr.map(fn);
 const arrHead = (arr) => arr[0];//start| - are probably better function names for real usage
 const arrTail = (arr) => arr[-1];//end | - but I like thinking of 1d arrays as a snake [<--->]
 const dotAtEnd = (arr) => arr.every(concatWithDot(arr[i]));
 //example of why this would work much better in typescript
-const quickSearch = (item, arr) => arr.includes(item) ? item : false
+const quickSearch = (arr, item) => arr[item] ? true : false
 const _filterEven = (arr) => arr.filter(isEven);
 const isEvenArr = (arr) => isEven(arr.length - 1) ? true : false;
 const arrMap = (input, output) => output.map(input);
 const mapWith = (input, output) => output.map(input.forEach(input.splitWith));
 const mapWithLetter = (input, output) =>
   output.map(input.forEach(input.splitWithLetter));
+const splitWith = (str, sep) => split(str, sep);
+const splitWithLetter = (str, sep) => split(str, sep);
+const splitWithDash = (str) => split(str, DASH);
+const splitWithUscore = (str) => split(str, USCORE);
+const splitWithDot = (str) => split(str, DOT);
+const splitWithSpace = (str) => split(str, SPACE);
 const arrRemoveDupes = (arr, item) => [...new Set(arr.filter(fn))];
 const arrRemoveDupesWithSpace = (arr, fn) => [
   ...new Set(arr.filter(fn).splitWithSpace()),
@@ -228,21 +234,30 @@ const arrRemoveDupesWithDot = (arr, fn) => [
 const arrRemoveDupesWithLetter = (arr, fn) => [
   ...new Set(arr.filter(fn).splitWithLetter()),
 ];
+//OR
+const arrRemoveWith = (arr, fn) => arr.filter(fn);
+const arrRemoveWithSpace = (arr, fn) => arr.filter(fn).splitWithSpace();
+const arrRemoveWithDash = (arr, fn) => arr.filter(fn).splitWithDash();
+const arrRemoveWithUscore = (arr, fn) => arr.filter(fn).splitWithUscore();
+const arrRemoveWithDot = (arr, fn) => arr.filter(fn).splitWithDot();
+const arrRemoveWithLetter = (arr, fn) => arr.filter(fn).splitWithLetter();
 
 const arrAdd = (arr, item) => [...arr, item];
 const sumAll = (arr) => arr.reduce((acc, curr) => acc + curr, 0);
 const arrRemove = (arr, item) => arr.filter((i) => i !== item);
-const arrRemoveWith = (arr, fn) => arr.filter(fn);
-const firstLastSort = (a, b, arr) => {
-  let arrFirst = arr[0];
-  let arrLast = arr[-1];
-  a == b ? arr.sort() : arr.sort((a, b) => a - b);
-};
-const firstLastSum = (a, b, arr) =>
-arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
-[...arr].sort((a, b) => a + b);
-const firstLastReduceSort = (a, b, arr) => [...arr].sort((a, b) => a - b);
-const arrItemRemove = (arr, item) => arr.filter((i) => i !== item);
+
+
+//need keep simplicity and make functional
+//const firstLastSort = (a, b, arr) => {
+  //let arrFirst = arr[0];
+  //let arrLast = arr[-1];
+ // a == b ? arr.sort() : arr.sort((a, b) => a - b);
+//};
+//const firstLastSum = (a, b, arr) =>
+//arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
+//[...arr].sort((a, b) => a + b);
+//const firstLastReduceSort = (a, b, arr) => [...arr].sort((a, b) => a - b);
+//const arrItemRemove = (arr, item) => arr.filter((i) => i !== item);
 //_____________________________________________________________________Functional Programing Part 1_________________________________________________
 //now things are starting to get a bit more complex we can do things like sort, filter, map, reduce, etc. These are the basic higher order functions 
 //(HOFs). Functional programming is much more fun when you introduce functions which take and return other functions.
