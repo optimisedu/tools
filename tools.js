@@ -456,51 +456,21 @@ const fibonacci = function* (n) {
   }
 };
 //_____________________________________________________________________Node Traversal____________________________________________________________________
-let tail;
 let head;
-const nodeAdd = (val) => {
-  let node = {
-    value: val,
-    next: null,
-  };
-  if (head === null) {
-    head = node;
-    tail = node;
-  } else {
-    tail.next = node;
-    tail = node;
-    t;
-  }
-  length++;
-};
-const nodeRemove = (val) => {
-  let current = head;
-  let previous = null;
-  while (current !== null) {
-    if (current.value === val) {
-      if (previous === null) {
-        head = current.next;
-      } else {
-        previous.next = current.next;
-      }
-      length--;
-      return true;
-    }
-    previous = current;
-    current = current.next;
-  }
-  return false;
-};
+
 const nodeSearch = (val) => {
-  let current = head;
+  let current;
   while (current !== null) {
-    if (current.value === val) {
-      return true;
-    }
-    current = current.next;
-  }
-  return false;
+    current === current[val] ? console.log(current[val]) : (current.next);
+  };
+}
+
+const recursiveNodes = (val) => {
+  let current = head;
+  current !== null ? (head = current.next) : (previous = current);
 };
+
+
 const nodeOutput = () => {
   let current = head;
   while (current !== null) {
@@ -508,6 +478,7 @@ const nodeOutput = () => {
     current = current.next;
   }
 };
+
 
 //_____________________________________________________________________IMAGE MANIPULATION________________________________________________________
 //web
