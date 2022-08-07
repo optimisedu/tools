@@ -1,3 +1,5 @@
+//_______________________________________________EASE OF USE ________________________________
+
 //Welcome to the mess that is my mind, I hope it helps you - this is not a traditional library and I have chose to not use module import. That may change.
 //This is built on the shoulders of giants massive shoutout to MDN, I am trying to keep as many of these functions pure as possible.
 //I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
@@ -735,17 +737,6 @@ const destructuring = (obj) => {
 };
 
 
-//---------------------------------------------------------USEFUL EVENTS----------------------------------------------------------------------------------
-const hover = onmouseover();
-const click = onclick();
-const dclick = ondblclick();
-let windowHeight = window.innerHeight(x); // optional z
-let windowWidth = window.innerWidth(y); //
-let windowArea = height * width;
-for (i = 0; i < arr.length; i++) {
-  let loopy;
-  console.log(loopy);
-}
 
 //--------------------------------------------------------FUNCTIONAL PROGRAMMING PART (N) CURRYING--------------------------------------------------------------------------
 //In my personal opinion currying is the apex of functional programming defining and calling itself, in larger more practical design systems.
@@ -758,6 +749,19 @@ const curryFunction = (fn, ...args) => {
 const add = (a, b) => a + b;
 const add5 = curryFunction(add, 5);
 console.log(add5(10));
+
+//---------------------------------------------------------USEFUL EVENTS----------------------------------------------------------------------------------
+const hover = onmouseover();
+const click = onclick();
+const dclick = ondblclick();
+let windowHeight = window.innerHeight(x); // optional z
+let windowWidth = window.innerWidth(y); //
+let windowArea = height * width;
+for (i = 0; i < arr.length; i++) {
+  let loopy;
+  console.log(loopy);
+}
+
 //_______________________________________________EASE OF USE ________________________________
 
 //Working with the DOM - no longer immutable, but nesciscarry for Front End Design (FED), not being used to extend classes
