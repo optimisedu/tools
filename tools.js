@@ -772,6 +772,15 @@ const D = document;
 const S = shadow;
 const C = child;
 
+
+const $body = document.body;
+const $create = document.createElement;
+const $appendC = document.appendChild;
+const $selector = document.querySelector;
+const $selectorAll = document.querySelectorAll;
+const $remove = document.removeChild;
+const $replace = document.replaceChild;
+const $insert = document.insertBefore;
 //initialise shaddow DOM and muatable element creation and manipulation
 
 this.attachShadowRoot();
@@ -786,6 +795,9 @@ setAttribute;
 setAtrributes;
 setAtributesString;
 hasAttribute; //
-setAtributeValue; //not immutable or functional
+setAtributeValue; //not immutable or functional but the building blocks of Javascript design patterns
+
+//There is no right way of programming but there certainly are stack overflows
+
 
 //There is no right way of programming but there certainly are stack overflows
