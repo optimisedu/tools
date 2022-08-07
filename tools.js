@@ -57,7 +57,7 @@ const DOT_REGEX = /\./g;
 const SPACE_REGEX = /\s/g;
 const USCORE_REGEX = /_/g;
 const ISBINARY = "/^0b[01]+$/i";
-const LEN = "length";
+const LEN = length;
 const toggle = (e) => (true ? false : true);
 
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
