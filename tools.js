@@ -88,12 +88,30 @@ const isOddUnFun = !isEven || isEven() ? false : true;
 const isOddClosure = toggle(isEven(n))//and just a little taste of what is to come
 const isFactor = (n, int) => (n % int == 0 ? true : false);
 const isPrime = (n) => {
-const r = () => Math.floor(Math.random() * 255) 
+    for (i = 2; i < n; i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+};
+const isFactor = (n, int) => { isOdd(n) ? false : true; };
+
+const isPrime = (n) => {
+    for (i = 2; i < n; i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+const r = () => Math.floor(Math.random() * 255)
 const mid = (int, n) => int - n || (n + int) / 2;//option one is getting the mode average, option two is median/mean(they are both the same as there are only two parameters)
 // --(Int manipulation)
 let fx = {};
 const intToString = (n, fx) => fx = n.toString();
-const strToInt = (str, fx) => fx = parseInt(str);//saving parseInt into a variable is not a requrirement however it is good practice if you are planning on using your  int in future functions.
+const strToInt = (str, fx) => fx = parseInt(str, fallback);//saving parseInt into a variable is not a requrirement however it is good practice if you are planning on using your  int in future functions.
 const strToFloat = (str) => parseFloat(str);
 const twoArrleng = (arr1, arr2) => map(arr1.length() + arr2.length());
 
@@ -204,17 +222,6 @@ const truncatedStringWithDash = (str, maxLength) => {
 		? str.slice(0, maxLength)
 		: str.concatWithDash(str.slice(-1));
 };
-const truncatedStringWithUscore = (str, maxLength) => {
-//Here string manipulation starts to change into integers, binary recursion and closures
-const binary = (num) => {
-	let binary = '';
-	while (num > 0) {
-		binary = (num % 2) + binary;
-		num = Math.floor(num / 2);
-	}
-	return binary;
-};
-console.log(binary(10));
 
 //======================================Array====================================
 const arrr = [1, 2, 3];
@@ -225,6 +232,7 @@ const spreadHOF = (fn, arr) => fn(...arr);
 const arrHead = (arr) => arr[0]; //start| - are probably better function names for real usage
 const arrTail = (arr) => arr[-1]; //end | - but I like thinking of 1d arrays as a snake [<--->]
 const dotAtEnd = (arr) => arr.every(concatWithDot(arr[i]));
+const dotAtStart = (arr) => arr.every(concatWithDot(arr[i]));
 //example of why this would work much better in typescript
 const quickSearch = (arr, target) => (arr[item] ? true : false);
 const _filterEven = (arr) => arr.filter(isEven);
@@ -254,7 +262,8 @@ const arrRemoveDupesWithDot = (arr, fn) => [
 ];
 const arrRemoveDupesWithLetter = (arr, fn) => [
 	...new Set(arr.filter(fn).splitWithLetter()),
-];
+	];
+const weakmap = new WeakMap();
 //OR
 const arrRemoveWith = (arr, fn) => arr.filter(fn);
 const arrRemoveWithSpace = (arr, fn) => arr.filter(fn).splitWithSpace();
@@ -312,7 +321,7 @@ const isPositive = val => val > 0;
 const isNegative = val => val < 0;
 const isZero = val => val === 0;
 const isTruthy = val => !!val;
-const isFalsy = val => !val; 
+const isFalsy = val => !val;
 
 const
 // =========================================Functional Proramming Part 1==================================
@@ -417,6 +426,73 @@ const listRandomCoord = (val, list) => {
 	list.push(...item);
 	return list;
 };
+
+// --(minimal array sorts  - oN extend with spread and reduce or flatten where needed
+//quick sort algorithm
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let divide = (arr) => {
+	let a = [];
+	let b = [];
+	for (let i = 0; i < arr.length; i++) {
+		isEven(i) ? a.push(arr[i]) : b.push(arr[i]);
+	}
+	return [a, b];
+};
+let combine = (a, b) => {
+	let arr = [];
+	for (let i = 0; i < a.length; i++) {
+		arr.push(a[i]);
+		arr.push(b[i]);
+	}
+
+	return arr;
+};
+let quickSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//bubble sort algorithm
+let bubbleSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//insertion sort algorithm
+let insertionSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//selection sort algorithm
+let selectionSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//tim sort algorithm
+let timSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//heap sort algorithm
+let heapSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//cocktail sort algorithm
+let cocktailSort = (arr) => {
+  let [a, b] = divide(arr);
+  return combine(a, b);
+};
+//gnome sort algorithm
+//===============================Numbers in Arayy======================
+const sum = (arr) => arr.reduce((acc, curr) => acc + curr, 0);
+const product = (arr) => arr.reduce((acc, curr) => acc * curr, 1);
+const max = (arr) => Math.max(...arr);
+const min = (arr) => Math.min(...arr);
+const average = (arr) => sum(arr) / arr.length;
+const median = (arr) => {
+	arr.sort((a, b) => a - b);
+	let mid = Math.floor(arr.length / 2);
+	return arr.length % 2 !== 0 ? arr[mid] : (arr[mid - 1] + arr[mid]) / 2;
+};
 //_==============================URI & Encryption======================_
 
 //--(decode URI)
@@ -467,16 +543,22 @@ const generator = function* (start = 0, end = 100, step = 1) {
 	return iterationCount;
 };
 
-const fibonacci = function* (n) {
+const fibonacci = function* (n, target) {
 	let current = 0;
-	for (i = 0; i < n; i++) {
+	target = target || 1;
+	while (current< target) {
 		let reset = yield (current[(current, next)] = [next, next + current]);
 		if (reset) {
 			current = 0;
 			next = 1;
 		}
+		
 	}
 };
+
+//break on target
+
+//--(Generator)
 
 
 
@@ -591,7 +673,7 @@ const imgToJpeg = function (img) {
 	return canvas.toDataURL('image/jpeg');
 };
 
-//--(bitmap,JPEG,PNG,GIF loads) 
+//--(bitmap,JPEG,PNG,GIF loads)
 //this is a safe way to load the image data that you want safely onto a canvas, from a valid URL, which has image data, and is a valid image type. This is an extremely powerful one line function
 
 const angleRadians = (p1, p2) => Math.atan2(p2.y - p1.y, p2.x - p1.x);
@@ -670,24 +752,28 @@ const drawHeart = (ctx, x, y, radius) => {
 	};
 	//--(canvas event listeners)
 	const reSize = (ctx, img, scale, width, height) => {
-		scale = window.onload ? window.onload.apply(windowWidth, windowHeight) : 1;	
+		scale = window.onload ? window.onload.apply(windowWidth, windowHeight) : 1;
 		ctx.canvas.width = width * scale;
 		ctx.canvas.height = height * scale;
 		ctx.drawImage(img, 0, 0, width * scale, height * scale);
 	};
-	const resizeCanvas = 
+	const resizeCanvas =
 	window.addEventListener('resize', reSize(...args) => {
 		ctx.canvas.width = width * scale;
 		ctx.canvas.height = height * scale;
 		ctx.drawImage(img, 0, 0, width * scale, height * scale);
 	});
 	//date mods
-const getWeek = (date) =>[0,6].includes(new Date(date).getDay());
+new Date().toLocaleString('en-gb', { timeZone: 'GMT' });//most efficient way to get the current date and time in the UK
+const getDay = (date) => new Date(date).getDay();
+const getWeek = (date) => [0, 6].includes(new Date(date).getDay()); //returns true if the date is a weekend in a relitively efficient way
 const getWeekend = (date) => [0,6].includes(new Date(date).getDay()) !== 1;
 const getWeekday = (date) => !getWeekend(date);
 const getMonth = (date) => new Date(date).getMonth();
 const getYear = (date) => new Date(date).getFullYear();
-
+//keep the order of the above functions in mind when using them in a HOF
+const getDay = (date) => new Date(date).getDay();
+const updateDay = (date, days) => this.date.setDate(getDay(date) + days);
 	//_________________________________________________________________Getters and Setters and Hashes_______________________________________________________________________
 //Lots of playing can be done with this lego -- specially mixed with some of the array functions and caching covered in the next section
 //also tested search function work with these objects - --See FUNCTIONAL PROGRAMMING PART 2--
@@ -920,7 +1006,51 @@ setAttribute;
 setAtrributes;
 setAtributesString;
 hasAttribute; //
-setAtributeValue; //not immutable or functional but the building blocks of Javascript design patterns
+setAtributeValue;
+
+//very useful function:
+
+function handleFiles() {
+	const fileList = this.files;
+	let loader = Promise.all(
+		Array.from(fileList).map((file) => {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = () => {
+					const img = new Image();
+					img.src = reader.result;
+					resolve(img);
+				};
+				reader.onerror = reject;
+			});
+		})
+	);
+	loader
+		.then((imgs) => {
+			images = imgs;
+		})
+		.then(() => {
+			canvas.style.border = "1px solid black";
+				let aspectRatio = images[currentImage].naturalWidth / images[currentImage].naturalHeight;
+				canvas.width = canvas.height * aspectRatio;
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.globalAlpha = globalAlpha;
+				ctx.drawImage(images[currentImage], 0, 0, canvas.width, canvas.height);
+			setInterval(animation, 30);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+//rewrite handleFiles function into a forEach
+
+function forEachFile() {
+	const fileList = this.files;
+	
+}
+
+//#endregion; //not immutable or functional but the building blocks of Javascript design patterns
 
 //There is no right way of programming but there certainly are stack overflows
 
