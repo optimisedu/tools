@@ -79,10 +79,10 @@ const MOD = (int, n) => int % n;
 const POW = (int, n) => Math.pow(int, n);
 const SQRT = (n) => Math.sqrt(n);
 const randomInt = (n) => Math.floor(Math.random() * (n - 1));
-const isEven = (n) => (num % 2 == 0 ? true : false);
+const isEven = (n) => (n % 2 == 0 ? true : false);
 
 const coinFlip = () => (Math.random() > 0.5 ? true : false);
-const isOdd = (n) => (num % 2 != 1 ? num : false);//another two ways of finding an odd number and returning a boolean value.
+const isOdd = (n) => (n % 2 != 1 ? num : false);//another two ways of finding an odd number and returning a boolean value.
 
 const isOddUnFun = !isEven || isEven() ? false : true;
 const isOddClosure = toggle(isEven(n))//and just a little taste of what is to come
@@ -106,7 +106,7 @@ const isPrime = (n) => {
     return true;
 }
 
-const r = () => Math.floor(Math.random() * 255)
+const r = () => randomInt(255)
 const mid = (int, n) => int - n || (n + int) / 2;//option one is getting the mode average, option two is median/mean(they are both the same as there are only two parameters)
 // --(Int manipulation)
 let fx = {};
@@ -304,16 +304,23 @@ const shuffle = (arr) => {
 //I have left it to here to add type validation as it's own section. Most programming languages have types built in and there are many ways of declaring types. If you aren't ready or do not want to deviate to typescript, adding basic type validation is a good idea.
 
 const isArray = val => Array.isArray(val);
-const isObject = val => typeof(val) === 'object'
-const isString = val => typeof(val) === 'string';
-const isNumber = val => typeof(val) === 'number';
-const isBoolean = val => typeof(val) === 'boolean';
-const isFunction = val => typeof(val) === 'function';
-const isUndefined = val => typeof(val) === 'undefined';
+const isObject = val => typeof val === 'object';
+const isString = val => typeof val === 'string';
+const isNumber = val => typeof val === 'number';
+const isBoolean = val => typeof val === 'boolean';
+const isFunction = val => typeof val === 'function';
+const isUndefined = val => typeof val === 'undefined';
 const isNull = val => val === null;
-const isSymbol = val => typeof(val) === 'symbol';
-const isBigInt = val => typeof(val) === 'bigint';
-const isPrimitive = val => isString(val) || isNumber(val) || isBoolean(val) || isSymbol(val) || isBigInt(val) || isNull(val) || isUndefined(val);
+const isSymbol = val => typeof val === 'symbol';
+const isBigInt = val => typeof val === 'bigint';
+const isPrimitive = val =>
+  isString(val) ||
+  isNumber(val) ||
+  isBoolean(val) ||
+  isSymbol(val) ||
+  isBigInt(val) ||
+  isNull(val) ||
+  isUndefined(val);
 const isIterable = val => isString(val) || isArray(val) || isObject(val);
 const isEven = val => val % 2 === 0;
 const isOdd = val => val % 2 !== 0;
@@ -322,6 +329,11 @@ const isNegative = val => val < 0;
 const isZero = val => val === 0;
 const isTruthy = val => !!val;
 const isFalsy = val => !val;
+const isPromise = val => val instanceof Promise;
+const isDate = val => val instanceof Date;
+const isRegExp = val => val instanceof RegExp;
+const isMap = val => val instanceof Map;
+const isSet = val => val instanceof Set;
 
 const
 // =========================================Functional Proramming Part 1==================================
@@ -501,22 +513,20 @@ const decode = (str) => decodeURIComponent(str);
 //--(encode string)
 const encode = (str) => encodeURIComponent(str);
 
-const encodeQueryString = (obj) => {
-	//very useful for sending data to a server PGP
-	let str = '';
-	for (let key in obj) {
-		str += `${encode(key)}=${encode(obj[key])}&`;
-	}
-	return str.slice(0, -1);
-};
+const encodeQueryString = (obj) => 
+    Object.entries(obj).map(([k, v]) => `${encode(k)}=${encode(v)}`).join('&');
 
 const generateRandomString = (length) => {
 	let str = '';
 	for (let i = 0; i < length; i++) {
-		str += Math.random().toString(36).substring(2, 15);
+		str += randomInt(36).substring(2, 15);
 	}
 	console.log(str);
 };
+//alt
+const generateRandomString = (length) => 
+    Array.from({length}, () => randomInt(36).toString(36)).join('');
+
 const form = (form) => {
 	const data = new FormData(form);
 	return data;
@@ -534,14 +544,14 @@ const formToUrlEncoded = (form) => {
 
 //==============================Generator and Fibonacci======================
 //Anothe form of itteration, generators aren't pure by nature, but this fibonacci function has a predictable output from the input. The benefit of Generator Functions is that you can pause and edit as each step needs a yield - hence this basic boiler has a for loop iteration nested inside
-const generator = function* (start = 0, end = 100, step = 1) {
-	let iterationCount = 0;
-	for (i = start; i < end; i += step) {
-		iterationCount++;
-		yield i;
-	}
-	return iterationCount;
+const fibonacci = function* (n) {
+    let [prev, curr] = [0, 1];
+    while (n-- > 0) {
+        [prev, curr] = [curr, prev + curr];
+        yield prev;
+    }
 };
+
 
 const fibonacci = function* (n, target) {
 	let current = 0;
@@ -582,17 +592,17 @@ const filteredLinearSearch = (arr, val) =>
 		.filter((item) => item !== -1)[0];
 
 const insertionSort = (arr) => {
-	for (let i = 1; i < arr.length; i++) {
-		let current = arr[i];
-		let j = i - 1;
-		while (j >= 0 && arr[j] > current) {
-			arr[j + 1] = arr[j];
-			j--;
-		}
-		arr[j + 1] = current;
-	}
-	return arr;
+    for (let i = 1; i < arr.length; i++) {
+        let current = arr[i];
+        let j;
+        for (j = i - 1; j >= 0 && arr[j] > current; j--) {
+            arr[j + 1] = arr[j];
+        }
+        arr[j + 1] = current;
+    }
+    return arr;
 };
+        
 //_____________________________________________________________________IMAGE MANIPULATION________________________________________________________
 //web
 const getJSON = (url) => fetch(url).then((res) => res.json());
