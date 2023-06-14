@@ -46,6 +46,7 @@ these patterns in their own words.
 
 *Done*
 -Capitolised "contributing"
+- Shortened optimised and removed as much code as I could manage this session 14/06/2023
 
 *TODO*
 - Spellcheck 
