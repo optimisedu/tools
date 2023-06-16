@@ -41,7 +41,7 @@ sections with comments have likely been tested for functionality.
 - FUNCTIONAL PROGRAMMING PART (N) CURRYING AND SUMMERY
 - Random Pieces of Lego
 
-## ributing
+## Conributing
 While I call this mine it is fully open source and I invite people to write the functional sections in their own words.
 
 This starts with a dot and continues to the apex of my understanding of functions. As such it will recurse on. The functors aren't the point.
