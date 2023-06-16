@@ -960,10 +960,11 @@ const destructuring = (...obj) => {
 	console.log(obj);
 };
 
-//--------------------------------------------------------FUNCTIONAL PROGRAMMING PART (N) CURRYING--------------------------------------------------------------------------
+//________________________________________________-FUNCTIONAL PROGRAMMING PART (N) CURRYING-_________________________________________________________________
 //In my personal opinion currying is the apex of functional programming defining and calling itself, in larger more practical design systems.
 //Currying can save a lot of time . The last 600 lines has been a monoid - a personal toolbox which is a self contained system.
-//If you have followed, than the most useful of functions which I have defined are curried. Not every function has had strictly one parametery, and a single return. There are also some side effects in this system. Curryingi is a form of functional destructuring, and it is a very powerful tool.
+//If you have followed, than the most useful of functions which I have defined are curried. Not every function has had strictly one parametery, 
+//and a single return. There are also some side effects in this system. Curryingi is a form of functional destructuring, and it is a very powerful tool.
 
 const curryFunction = (fn, ...args) => {
 	return (...moreArgs) => fn(...args, ...moreArgs);
@@ -972,8 +973,82 @@ const add = (a, b) => a + b;
 const add5 = curryFunction(add, 5);
 console.log(add5(10));
 
-//---------------------------------------------------------USEFUL EVENTS----------------------------------------------------------------------------------
-// MDN HAS FAR MORE USEFUL INFORMATION ON EVENT HANDLING THAN I CAN WRITE:
+
+//____________________________________________________________-The AI Monad-__________________________________________________________________________________
+//I asked a popular chatbot to add it's own functional Monad and it came up with a useful little addition, note the difference in our coding style?:
+
+//--(Maybe)
+function Maybe(value) {
+  return {
+    map: function(fn) {
+      if (value === null || value === undefined) {
+        return Maybe(null);
+      }
+      return Maybe(fn(value));
+    },
+    join: function() {
+      if (value && value.isMaybe) {
+        return value;
+      }
+      return Maybe(value);
+    },
+    value: value,
+    isMaybe: true,
+  };
+}
+
+//"You can use the map function to apply a function to the value inside the Maybe Monad, while the join function is used to flatten 
+//a Monad of a Monad down to a single level.
+
+//This is how you might use it:"
+
+const maybeSquareRoot = (x) => Maybe(x >= 0 ? Math.sqrt(x) : null);
+
+const result = Maybe(4)
+  .map(x => x * 2)
+  .map(maybeSquareRoot)
+  .join()  // Unwraps the inner Maybe
+  .map(x => x + 1)
+  .value;
+
+console.log(result);  // Prints 3.0
+
+
+function Maybe(value) {
+  return {
+    map: function(fn) {
+      if (value === null || value === undefined) {
+        return Maybe(null);
+      }
+      return Maybe(fn(value));
+    },
+    join: function() {
+      if (value && value.isMaybe) {
+        return value;
+      }
+      return Maybe(value);
+    },
+    chain: function(fn) {
+      return this.map(fn).join();
+    },
+    value: value,
+    isMaybe: true,
+  };
+}
+
+const result = Maybe(4)
+  .map(x => x * 2)
+  .chain(maybeSquareRoot)
+  .map(x => x + 1)
+  .value;
+
+console.log(result);  // Prints 3.0
+
+
+
+
+//-------------------------------USEFUL EVENTS-----------------------------------------------
+// MDN HAS FAR MORE USEFUL INFORMATION ON EVENT HANDLING THAN I CAN WRITE HOWEVER I ENCORAGE YOU TO MAKE YOUR OWN CUSTOM SNIPPETS AND GET USED TO THESE FUNCTIONS:
 // https://developer.mozilla.org/en-US/docs/Web/Events
 //_______________________________________________EASE OF USE ________________________________
 
