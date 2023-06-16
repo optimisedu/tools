@@ -65,7 +65,7 @@ these patterns in their own words.
 - Shortened optimised and removed as much code as I could manage this session
 - Added (more) primitive checkers
 
-## To do(and expand on)
+## To Do(and expand on)
 - Spellcheck 
 - Add your ideas, and thoughts in comments. Play with the lego **ala Functional Programming part 2, see what works together, make your monads, do module export, add types. Bend this to your will
 - I am looking to blog about micro-optimisattions so if you can think of a method **add it
