@@ -31,7 +31,7 @@ sections with comments have likely been tested for functionality.
    - (Mutation Observer)
    - (MEMOISATION and CACHING)
    - (UNESSIISCCARY BRUTE FORCE)
-- **The Monad and AI
+- **Functional programming part 4 | The Monad and AI
    - (Maybe?)
 - **BASIC ASYNC PROMISES
 
