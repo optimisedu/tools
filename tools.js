@@ -62,7 +62,6 @@ const USCORE_REGEX = /_/g;
 const LEN = length; //unescisarry
 const isBool = (bool) => (bool === true ? true : false);
 const toggle = (e) => (true ? false : true);
-
 //__________________________________________________________________--INTEGER BASICS -FAR MORE TO COME_______________________________________________________________
 //The let variable can be recalled multiple times. There are some coding patterns which are near universal -- i is iterate, and if you have a lot of for loops, e is generally event and n is genrerally number. This is not a requirement and only advised for readability.
 //it is often worth letting i globally (as opposed to each time you have parenthesis()). As a beginner learning code knowing the operators inside out is a great help.
@@ -74,16 +73,15 @@ let int;//this is required as a second parameter for some of the following funct
 const ADD = (int, n) => int + n;
 const SUB = (int, n) => int - n;
 const MUL = (int, n) => int * n;
-const DIV = (int, n) => int / n;
+const DIV = (int, noolean = () => Math.random() >= 0.5) => int / n;
 const MOD = (int, n) => int % n;
 const POW = (int, n) => Math.pow(int, n);
 const SQRT = (n) => Math.sqrt(n);
 const randomInt = (n) => Math.floor(Math.random() * (n - 1));
 const isEven = (n) => (n % 2 == 0 ? true : false);
-
+const oldCoinFlip()=> constrandomB 
 const coinFlip = () => (Math.random() > 0.5 ? true : false);
 const isOdd = (n) => (n % 2 != 1 ? num : false);//another two ways of finding an odd number and returning a boolean value.
-
 const isOddUnFun = !isEven || isEven() ? false : true;
 const isOddClosure = toggle(isEven(n))//and just a little taste of what is to come
 const isFactor = (n, int) => (n % int == 0 ? true : false);
@@ -114,7 +112,6 @@ const intToString = (n, fx) => fx = n.toString();
 const strToInt = (str, fx) => fx = parseInt(str, fallback);//saving parseInt into a variable is not a requrirement however it is good practice if you are planning on using your  int in future functions.
 const strToFloat = (str) => parseFloat(str);
 const twoArrleng = (arr1, arr2) => map(arr1.length() + arr2.length());
-
 //PRACTICAL USE: Generate a random color - this saves writing the whole randomInt function,
 //which saves generating a random color line line ETC
 
@@ -141,7 +138,9 @@ const createRandomGradient = (n) => {
 // language so different methods suit different approaches
 
 const str = 'Awkward . str / uctuure spe44ing - mistakes _ DELIBERATE';
+const getSelectedText = () => window.getSelection().toString()
 const strAdd = (str, item) => str + item;
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
 const strLen = (str) => str.LEN;
 const strFirst = (str, strLen) => str.strLen[1];
 const strLast = (str, strLen) => str.strlen[-1];
@@ -276,12 +275,14 @@ const sumAll = (arr) => arr.reduce((acc, curr) => acc + curr, 0);
 const arrRemove = (arr, item) => arr.filter((i) => i !== item);
 const merge = (arr1, arr2) => [...arr1, ...arr2];
 // this sorting algoirtm is an example of why functional purity (one parameter and one output) or typechecking is better than mutability in *most* cases
+
+----------------------------------------ARR SORT (todo arrange [IRONY])------------------------------------------------------------ 
 const firstLastSort = (a, b, arr) => {
 let arrFirst = arr[0];
 let arrLast = arr[-1];
 a == b ? arr.sort() : arr.sort((a, b) => a - b);
 };
-
+const shuffleArray = array => array.sort(() => Math.random() - 0.5)
 const firstLastSum = (a, b, arr) =>
 arrFirst !== arrLast ? arrFirst + sumAll([arrFirst + 1, arrLast]) : arrFirst;
 [...arr].sort((a, b) => a + b);
@@ -1044,8 +1045,8 @@ const result = Maybe(4)
 
 console.log(result);  // Prints 3.0
 
-
-
+-------------------------------------------------------------------------------/NODE----------------------------------------------
+const clearCookies = document.cookie.split(';').forEach(cookie => document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`))
 
 //-------------------------------USEFUL EVENTS-----------------------------------------------
 // MDN HAS FAR MORE USEFUL INFORMATION ON EVENT HANDLING THAN I CAN WRITE HOWEVER I ENCORAGE YOU TO MAKE YOUR OWN CUSTOM SNIPPETS AND GET USED TO THESE FUNCTIONS:
@@ -1120,7 +1121,7 @@ function handleFiles() {
 				let aspectRatio = images[currentImage].naturalWidth / images[currentImage].naturalHeight;
 				canvas.width = canvas.height * aspectRatio;
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.globalAlpha = globalAlpha;
+				ctx.globalAlpha = globalAlpha
 				ctx.drawImage(images[currentImage], 0, 0, canvas.width, canvas.height);
 			setInterval(animation, 30);
 		})
@@ -1128,15 +1129,7 @@ function handleFiles() {
 			console.log(err);
 		});
 }
-//rewrite handleFiles function into a forEach
 
-function forEachFile() {
-	const fileList = this.files;
-	
-}
-
-//#endregion; //not immutable or functional but the building blocks of Javascript design patterns
-
-//There is no right way of programming but there certainly are stack overflows
-
+//usecase for frameworks popups and dialogue
+const tabInView =() =!document.hidden
 //There is no right way of programming but there certainly are stack overflows
