@@ -222,7 +222,8 @@ const truncatedStringWithDash = (str, maxLength) => {
 		? str.slice(0, maxLength)
 		: str.concatWithDash(str.slice(-1));
 };
-
+//oooor
+const removePunctuation(str) return str.replaceAll(/[^a-zA-Z0-9]/g,"");
 //======================================Array====================================
 const arrr = [1, 2, 3];
 const arr2 = arrr.map((item) => item + 1);
