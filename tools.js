@@ -5,6 +5,8 @@
 //I also want to thank Lukaz Ruebbekle for making the clarity of his talks and taking the time to give this a once over. I didn't take any advice on error handling
 //Potentially this could be used as a teaching resource after a lot of cleaning. If anybody wants input it would be appreciated.
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //            CONTENTS
 //__________________________________________________________________________________________________
@@ -72,6 +74,18 @@ let i; //iterable
 let n; //this allows the same value to be passed through multiple functions as a property.
 let int;//this is required as a second parameter for some of the following functions. Declaring your functions/arguments at the top of your code is a good habit.
 const ADD = (int, n) => int + n;
+
+// var I is implicitly hoisted to the top
+// i = 0;
+// var n = 10;
+// in this case for addition we are starting with 10
+// this creates obvious side effects
+//there's multiple ways of doing a function this basic addion could be rewritten as:
+//const ADD = (int, n) => {return int + n};
+//or
+// function ADD (int, n) ;
+// {return int + n};
+// the return and curly braces are implicit in arrow functions but can be added
 const SUB = (int, n) => int - n;
 const MUL = (int, n) => int * n;
 const DIV = (int, n) => int / n;
@@ -222,8 +236,7 @@ const truncatedStringWithDash = (str, maxLength) => {
 		? str.slice(0, maxLength)
 		: str.concatWithDash(str.slice(-1));
 };
-//oooor
-const removePunctuation(str) return str.replaceAll(/[^a-zA-Z0-9]/g,"");
+
 //======================================Array====================================
 const arrr = [1, 2, 3];
 const arr2 = arrr.map((item) => item + 1);
